@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_width="match_parent"
+        android:layout_height="269dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/logonaranja" />
+
+    <EditText
+        android:id="@+id/usuario"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/logo"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="33dp"
+        android:layout_marginEnd="30dp"
+        android:hint="Usuario"
+        android:padding="10dp"
+        android:background="@drawable/custom_background" />
+
+    <EditText
+        android:id="@+id/pasword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="33dp"
+        android:layout_marginEnd="30dp"
+        android:background="@drawable/custom_background"
+        android:hint="Contraseña"
+        android:padding="10dp" />
+
+    <android.widget.Button
+        android:id="@+id/login"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/username"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="79dp"
+        android:layout_marginEnd="30dp"
+        android:background="@drawable/button"
+        android:text="Login"/>
+
+    <TextView
+        android:id="@+id/register"
+        android:layout_width="77dp"
+        android:layout_height="30dp"
+        android:layout_below="@id/login"
+        android:layout_alignEnd="@+id/login"
+        android:layout_marginTop="27dp"
+        android:layout_marginEnd="137dp"
+        android:background="@drawable/custom_background"
+        android:text="Register"
+        android:textColor="#E88B2D" />
+
+</RelativeLayout>
