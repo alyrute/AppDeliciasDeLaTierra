@@ -10,8 +10,8 @@
         android:layout_height="269dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
-        android:src="@drawable/logonaranja" />
+        android:layout_marginTop="60dp"
+        android:src="@drawable/logoverde" />
 
     <EditText
         android:id="@+id/usuario"
@@ -23,40 +23,48 @@
         android:layout_marginEnd="30dp"
         android:hint="Usuario"
         android:padding="10dp"
-        android:background="@drawable/custom_background" />
+        android:minHeight="48dp" />
 
     <EditText
-        android:id="@+id/pasword"
+        android:id="@+id/password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/usuario"
         android:layout_marginStart="30dp"
         android:layout_marginTop="33dp"
         android:layout_marginEnd="30dp"
-
         android:hint="Contraseña"
-        android:padding="10dp" />
+        android:padding="10dp"
+        android:minHeight="48dp"
+        android:inputType="textPassword" />
 
-    <android.widget.Button
+    <TextView
         android:id="@+id/login"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/username"
+        android:layout_below="@id/password"
         android:layout_marginStart="30dp"
-        android:layout_marginTop="79dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="30dp"
-        android:background="@drawable/button"
-        android:text="Login"/>
+        android:background="@color/brown"
+        android:text="Login"
+        android:gravity="center"
+        android:padding="10dp"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:clickable="true"
+        android:focusable="true"
+        android:minHeight="48dp"/>
 
     <TextView
         android:id="@+id/register"
-        android:layout_width="77dp"
-        android:layout_height="30dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_below="@id/login"
-        android:layout_alignEnd="@+id/login"
-        android:layout_marginTop="27dp"
-        android:layout_marginEnd="137dp"
-        android:background="@drawable/custom_background"
-        android:text="Register"
-        android:textColor="#E88B2D" />
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"
+        android:textStyle="bold"
+        android:text="¿No tienes cuenta? Regístrate aquí"
+        android:textColor="@color/green" />
 
 </RelativeLayout>
