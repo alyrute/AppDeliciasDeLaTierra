@@ -67,4 +67,8 @@
         android:text="¿No tienes cuenta? Regístrate aquí"
         android:textColor="@color/green" />
 
+    <include
+        android:id="@+id/log"
+        layout="@layout/content_login"/>
+
 </RelativeLayout>
