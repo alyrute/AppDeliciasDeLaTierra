@@ -1,11 +1,12 @@
 package net.azarquiel.appdeliciasdelatierra.api
 
+import android.util.Log
 import net.azarquiel.appdeliciasdelatierra.model.Categoria
 import net.azarquiel.appdeliciasdelatierra.model.Intercambio
-import net.azarquiel.appdeliciasdelatierra.model.Login
 import net.azarquiel.appdeliciasdelatierra.model.Mensaje
 import net.azarquiel.appdeliciasdelatierra.model.Producto
 import net.azarquiel.appdeliciasdelatierra.model.Usuario
+
 
 class MainRepository() {
     val service = WebAccess.deliciasService
@@ -65,8 +66,9 @@ class MainRepository() {
         return null
     }
 
-    suspend fun login(login: Login): String? {
-        val webResponse = service.login(login).await()
+    suspend fun getLogin(email: String, password: String): Usuario? {
+        val webResponse = service.getLogin(email, password).await()
+        Log.d("API Response", "Response: $webResponse")
         if (webResponse.isSuccessful) {
             return webResponse.body()
         }

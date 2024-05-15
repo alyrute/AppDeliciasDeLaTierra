@@ -50,17 +50,12 @@ data class Mensaje (
 
     ): Serializable
 
-data class Login(
-    val usuario: String,
-    val password: String
-)
 
 data class Respuesta (
     val usuario: Usuario,
     val producto: Producto,
     val categoria: Categoria,
     val intercambio: Intercambio,
-    val mensaje: Mensaje,
-    val login: Login
+    val mensaje: Mensaje
 )
 

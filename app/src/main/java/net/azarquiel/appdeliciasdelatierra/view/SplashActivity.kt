@@ -1,4 +1,4 @@
-package net.azarquiel.appdeliciasdelatierra
+package net.azarquiel.appdeliciasdelatierra.view
 
 import android.content.Intent
 import android.graphics.Color
@@ -9,6 +9,7 @@ import android.os.Looper
 import android.view.View
 
 import androidx.appcompat.app.AppCompatActivity
+import net.azarquiel.appdeliciasdelatierra.LoginActivity
 
 class SplashActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

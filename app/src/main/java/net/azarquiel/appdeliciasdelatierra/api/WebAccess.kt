@@ -9,7 +9,7 @@ object WebAccess {
         val retrofit = Retrofit.Builder()
             .addConverterFactory(GsonConverterFactory.create())
             .addCallAdapterFactory(CoroutineCallAdapterFactory())
-            .baseUrl("http://localhost:8082/")
+            .baseUrl("http://192.168.0.12:8082/")
             .build()
 
         return@lazy retrofit.create(DeliciasService::class.java)

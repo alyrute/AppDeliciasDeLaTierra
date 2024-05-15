@@ -2,9 +2,9 @@ package net.azarquiel.appdeliciasdelatierra.api
 import kotlinx.coroutines.Deferred
 import net.azarquiel.appdeliciasdelatierra.model.Categoria
 import net.azarquiel.appdeliciasdelatierra.model.Intercambio
-import net.azarquiel.appdeliciasdelatierra.model.Login
 import net.azarquiel.appdeliciasdelatierra.model.Mensaje
 import net.azarquiel.appdeliciasdelatierra.model.Producto
+import net.azarquiel.appdeliciasdelatierra.model.Respuesta
 import net.azarquiel.appdeliciasdelatierra.model.Usuario
 import retrofit2.Response
 import retrofit2.http.*
@@ -31,8 +31,11 @@ interface DeliciasService {
     @POST("producto")
     fun insertarProducto(@Body producto: Producto): Deferred<Response<Producto>>
 
-    @POST("login")
-    fun login(@Body login: Login): Deferred<Response<String>>
+    @GET("login")
+    fun getLogin(
+        @Query("email") email: String,
+        @Query("password") password: String): Deferred<Response<Usuario>>
+
 
     @POST("register")
     fun register(@Body usuario: Usuario): Deferred<Response<String>>
