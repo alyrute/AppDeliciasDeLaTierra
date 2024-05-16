@@ -25,34 +25,51 @@ class LoginActivity : AppCompatActivity() {
 
         viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
 
+        setupViews()
+    }
 
+    private fun setupViews() {
         binding.loginButton.setOnClickListener {
-            val emailEditText = binding.email
-            val email = emailEditText.text.toString()
-            val passwordEditText = binding.password
-            val password = passwordEditText.text.toString()
+            val email = binding.email.text.toString()
+            val password = binding.password.text.toString()
 
             if (email.isNotEmpty() && password.isNotEmpty()) {
-                viewModel.getLogin(email, password)
-                viewModel.usuario.observe(this, Observer { usuario ->
-                    if (usuario != null) {
-                        val intent = Intent(this, MainActivity::class.java)
-                        startActivity(intent)
-                        finish() // Finalizar LoginActivity para que no se pueda regresar presionando el botón de atrás
-                    } else {
-                        Toast.makeText(this, "Credenciales incorrectas", Toast.LENGTH_SHORT).show()
-                    }
-                })
+                loginUser(email, password)
             } else {
-                Toast.makeText(this, "Por favor ingresa email y contraseña", Toast.LENGTH_SHORT)
-                    .show()
+                showToast("Por favor ingresa email y contraseña")
             }
         }
 
-        val botonRegistro = binding.register
-        botonRegistro.setOnClickListener {
-            val intent = Intent(this, RegisterActivity::class.java)
-            startActivity(intent)
+        binding.register.setOnClickListener {
+            navigateToRegister()
+        }
+    }
+
+    private fun loginUser(email: String, password: String) {
+        viewModel.getLogin(email, password)
+        viewModel.usuario.observe(this, Observer { usuario ->
+            if (usuario != null) {
+                navigateToMain()
+            } else {
+                showToast("Credenciales incorrectas")
+            }
+        })
+    }
+
+    private fun navigateToMain() {
+        val intent = Intent(this, MainActivity::class.java)
+        startActivity(intent)
+        finish()
+    }
+
+    private fun navigateToRegister() {
+        val intent = Intent(this, RegisterActivity::class.java)
+        startActivity(intent)
+    }
+
+    private fun showToast(message: String) {
+        runOnUiThread {
+            Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
         }
     }
 }

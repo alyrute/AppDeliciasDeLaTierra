@@ -28,10 +28,12 @@ class RegisterActivity : AppCompatActivity() {
         binding = ActivityRegisterBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-
         viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
 
+        setupViews()
+    }
 
+    private fun setupViews() {
         binding.registerButton.setOnClickListener {
             val email = binding.email.text.toString()
             val password = binding.password.text.toString()
@@ -40,21 +42,51 @@ class RegisterActivity : AppCompatActivity() {
             val poblacion = binding.poblacion.text.toString()
             val provincia = binding.provincia.text.toString()
 
-            if (email.isNotEmpty() && password.isNotEmpty() && nombre.isNotEmpty() && apellidos.isNotEmpty() && poblacion.isNotEmpty() && provincia.isNotEmpty()) {
+            if (validateFields(email, password, nombre, apellidos, poblacion, provincia)) {
                 val usuario = Usuario(email = email, password = password, nombre = nombre, apellidos = apellidos, poblacion = poblacion, provincia = provincia)
-                viewModel.register(usuario).observe(this, Observer { usuarioRegistrado ->
-                    if (usuarioRegistrado != null) {
-                        Toast.makeText(this, "Registro exitoso", Toast.LENGTH_SHORT).show()
-                        val intent = Intent(this, LoginActivity::class.java)
-                        startActivity(intent)
-                        finish()
-                    } else {
-                        Toast.makeText(this, "Error al registrar usuario", Toast.LENGTH_SHORT).show()
-                    }
-                })
-            } else {
-                Toast.makeText(this, "Todos los campos son obligatorios", Toast.LENGTH_SHORT).show()
+                registerUser(usuario)
             }
         }
+
+        binding.backToLogin.setOnClickListener {
+            navigateToLogin()
+        }
+    }
+
+    private fun validateFields(email: String, password: String, nombre: String, apellidos: String, poblacion: String, provincia: String): Boolean {
+        if (email.isEmpty() || !android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            showToast("Por favor, introduce un correo electrónico válido")
+            return false
+        }
+        if (password.length < 6) {
+            showToast("La contraseña debe tener al menos 6 caracteres")
+            return false
+        }
+        if (nombre.isEmpty() || apellidos.isEmpty() || poblacion.isEmpty() || provincia.isEmpty()) {
+            showToast("Todos los campos son obligatorios")
+            return false
+        }
+        return true
+    }
+
+    private fun registerUser(usuario: Usuario) {
+        viewModel.register(usuario).observe(this, Observer { usuarioRegistrado ->
+            if (usuarioRegistrado != null) {
+                showToast("Registro exitoso")
+                navigateToLogin()
+            } else {
+                showToast("Error al registrar usuario")
+            }
+        })
+    }
+
+    private fun navigateToLogin() {
+        val intent = Intent(this, LoginActivity::class.java)
+        startActivity(intent)
+        finish()
+    }
+
+    private fun showToast(message: String) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 }
