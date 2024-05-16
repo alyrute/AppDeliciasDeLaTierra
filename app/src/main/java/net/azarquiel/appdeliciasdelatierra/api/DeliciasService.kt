@@ -36,9 +36,8 @@ interface DeliciasService {
         @Query("email") email: String,
         @Query("password") password: String): Deferred<Response<Usuario>>
 
-
     @POST("register")
-    fun register(@Body usuario: Usuario): Deferred<Response<String>>
+    fun register(@Body usuario: Usuario): Deferred<Response<Usuario>>
 
     @POST("mensaje")
     fun enviarMensaje(@Body mensaje: Mensaje): Deferred<Response<Mensaje>>

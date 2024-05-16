@@ -1,33 +1,138 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
-    tools:context=".view.RegisterActivity">
+    android:background="@color/white">
 
-    <com.google.android.material.appbar.AppBarLayout
+    <!-- Logo -->
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_width="match_parent"
+        android:layout_height="252dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="0dp"
+        android:src="@drawable/logoverde" />
+
+    <!-- Campo de nombre -->
+    <EditText
+        android:id="@+id/nombre"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fitsSystemWindows="true">
+        android:layout_below="@id/logo"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="30dp"
+        android:hint="Nombre"
+        android:padding="10dp"
+        android:minHeight="48dp" />
 
-        <com.google.android.material.appbar.MaterialToolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize" />
+    <!-- Campo de apellidos -->
+    <EditText
+        android:id="@+id/apellidos"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/nombre"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="30dp"
+        android:hint="Apellidos"
+        android:padding="10dp"
+        android:minHeight="48dp" />
 
-    </com.google.android.material.appbar.AppBarLayout>
+    <!-- Campo de población -->
+    <EditText
+        android:id="@+id/poblacion"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/apellidos"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="30dp"
+        android:hint="Población"
+        android:padding="10dp"
+        android:minHeight="48dp" />
 
-    <include layout="@layout/content_register" />
+    <!-- Campo de provincia -->
+    <EditText
+        android:id="@+id/provincia"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/poblacion"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="30dp"
+        android:hint="Provincia"
+        android:padding="10dp"
+        android:minHeight="48dp" />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab"
+
+    <!-- Campo de email -->
+
+    <!-- Campo de contraseña -->
+
+    <EditText
+        android:id="@+id/email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/provincia"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="30dp"
+        android:hint="Email"
+        android:minHeight="48dp"
+        android:padding="10dp" />
+
+    <EditText
+        android:id="@+id/password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/email"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="30dp"
+        android:hint="Contraseña"
+        android:padding="10dp"
+        android:minHeight="48dp"
+        android:inputType="textPassword" />
+
+
+    <!-- Botón de registro -->
+
+    <!-- Enlace para volver a la página de inicio de sesión -->
+
+    <TextView
+        android:id="@+id/registerButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/provincia"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="164dp"
+        android:layout_marginEnd="30dp"
+        android:background="@color/green"
+        android:clickable="true"
+        android:focusable="true"
+        android:gravity="center"
+        android:minHeight="48dp"
+        android:padding="10dp"
+        android:text="Registrarse"
+        android:textColor="@color/white"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/backToLogin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_marginEnd="@dimen/fab_margin"
-        android:layout_marginBottom="16dp"
-        app:srcCompat="@android:drawable/ic_dialog_email" />
+        android:layout_below="@id/registerButton"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"
+        android:text="¿Ya tienes cuenta? Inicia sesión aquí"
+        android:textColor="@color/brown"
+        android:textStyle="bold" />
 
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+    <!-- Contenido incluido -->
+    <include
+        android:id="@+id/reg"
+        layout="@layout/content_register" />
+
+</RelativeLayout>

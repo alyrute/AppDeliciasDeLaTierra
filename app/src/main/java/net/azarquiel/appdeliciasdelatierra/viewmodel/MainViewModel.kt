@@ -1,5 +1,6 @@
 package net.azarquiel.appdeliciasdelatierra.viewmodel
 import android.util.Log
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -47,11 +48,16 @@ class MainViewModel : ViewModel() {
         }
     }
 
+    fun register (usuario: Usuario):MutableLiveData<Usuario> {
+        val usuarioResponse= MutableLiveData<Usuario>()
+        GlobalScope.launch(Dispatchers.Main) {
+            usuarioResponse.value = repository.register(usuario)
+        }
+        return usuarioResponse
+    }
 
-
-    fun register(usuario: Usuario) = viewModelScope.launch { repository.register(usuario) }
     fun enviarMensaje(mensaje: Mensaje) = viewModelScope.launch {
-        repository.enviarMensaje(mensaje)
+    repository.enviarMensaje(mensaje)
     }
 
     fun recibirMensajes(idUsuario: Int) = viewModelScope.launch { repository.recibirMensajes(idUsuario) }

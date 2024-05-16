@@ -4,7 +4,7 @@ import java.io.Serializable
 import java.util.Date
 
 data class Usuario (
-    var idusuario: Int,
+    var idusuario: Int? =null,
     var nombre: String,
     var apellidos: String,
     var email: String,

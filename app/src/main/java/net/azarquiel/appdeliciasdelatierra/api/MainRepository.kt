@@ -68,6 +68,14 @@ class MainRepository() {
 
     suspend fun getLogin(email: String, password: String): Usuario? {
         val webResponse = service.getLogin(email, password).await()
+        if (webResponse.isSuccessful) {
+            return webResponse.body()
+        }
+        return null
+    }
+
+    suspend fun register(usuario: Usuario): Usuario? {
+        val webResponse = service.register(usuario).await()
         Log.d("API Response", "Response: $webResponse")
         if (webResponse.isSuccessful) {
             return webResponse.body()
@@ -75,13 +83,6 @@ class MainRepository() {
         return null
     }
 
-    suspend fun register(usuario: Usuario): String? {
-        val webResponse = service.register(usuario).await()
-        if (webResponse.isSuccessful) {
-            return webResponse.body()
-        }
-        return null
-    }
 
     suspend fun enviarMensaje(mensaje: Mensaje): Mensaje? {
         val webResponse = service.enviarMensaje(mensaje).await()
