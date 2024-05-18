@@ -7,7 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import net.azarquiel.appdeliciasdelatierra.databinding.ActivityLoginBinding
-import net.azarquiel.appdeliciasdelatierra.databinding.ActivityMainBinding
+
 import net.azarquiel.appdeliciasdelatierra.model.Usuario
 import net.azarquiel.appdeliciasdelatierra.view.MainActivity
 import net.azarquiel.appdeliciasdelatierra.view.RegisterActivity
@@ -49,11 +49,19 @@ class LoginActivity : AppCompatActivity() {
         viewModel.getLogin(email, password)
         viewModel.usuario.observe(this, Observer { usuario ->
             if (usuario != null) {
+                saveUsername(usuario.nombre)
                 navigateToMain()
             } else {
                 showToast("Credenciales incorrectas")
             }
         })
+    }
+
+    private fun saveUsername(nombre: String) {
+        val sharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+        editor.putString("username", nombre)
+        editor.apply()
     }
     private fun navigateToMain() {
         val intent = Intent(this, MainActivity::class.java)

@@ -1,15 +1,22 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
     <style name="Base.Theme.AppDeliciasDeLaTierra" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+        <!-- Define el color de fondo de la barra de acción -->
+        <item name="colorPrimary">@color/orange</item>
+        <item name="toolbarStyle">@style/MyToolbar</item>
+
     </style>
 
     <style name="Theme.AppDeliciasDeLaTierra" parent="Base.Theme.AppDeliciasDeLaTierra" />
 
-
     <style name="SplashTheme" parent="Theme.AppCompat.NoActionBar">
-        <item name="android:windowBackground">@drawable/imgsplash</item>
+        <item name="android:windowBackground">@drawable/fondo</item>
+    </style>
+
+    <style name="MyToolbar" parent="Widget.MaterialComponents.Toolbar.Primary">
+        <item name="titleTextColor">@color/white</item>
     </style>
 
 </resources>

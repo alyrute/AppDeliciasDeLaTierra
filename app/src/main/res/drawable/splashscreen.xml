@@ -3,7 +3,7 @@
     <item
         android:width="70dp"
         android:height="100dp">
-        <bitmap android:src="@drawable/imgsplash"/>
+        <bitmap android:src="@drawable/fondo"/>
     </item>
 
 </layer-list>

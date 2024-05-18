@@ -1,33 +1,114 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
-    tools:context=".view.MainActivity">
+    android:padding="16dp">
 
-    <com.google.android.material.appbar.AppBarLayout
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/my_toolbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:fitsSystemWindows="true">
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary" />
 
-        <com.google.android.material.appbar.MaterialToolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize" />
+    <!-- Imagen de fondo -->
+    <ImageView
+        android:id="@+id/backgroundImage"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/imgsplash"
+        android:alpha="0.5" />
 
-    </com.google.android.material.appbar.AppBarLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#80FFFFFF" />
 
-    <include layout="@layout/content_main" />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab"
+    <TextView
+        android:id="@+id/welcomeTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_marginEnd="@dimen/fab_margin"
-        android:layout_marginBottom="16dp"
-        app:srcCompat="@android:drawable/ic_dialog_email" />
+        android:textSize="24sp"
+        android:textColor="@color/orange"
+        android:textStyle="bold"
+        android:layout_marginBottom="16dp" />
 
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+    <TextView
+        android:id="@+id/titulo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="80dp"
+        android:layout_marginBottom="16dp"
+        android:text="Delicias De La Tierra"
+        android:textColor="@color/brown"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/infoText"
+        android:layout_width="wrap_content"
+        android:layout_height="309dp"
+        android:layout_below="@id/titulo"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="56dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="32dp"
+        android:text="Delicias de la Tierra es una iniciativa que fomenta el intercambio de comida entre vecinos para combatir el desperdicio y promover el aprovechamiento responsable de los alimentos. A través de nuestra app, los usuarios pueden compartir productos frescos y platos caseros, creando una comunidad unida y sostenible. Juntos, transformamos el excedente en una oportunidad para disfrutar de la diversidad culinaria local y apoyar prácticas más ecológicas y conscientes. ¡Únete a nosotros y descubre las Delicias de la Tierra en tu propio vecindario!"
+        android:textColor="@color/brown"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/searchFoodButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/infoText"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="20dp"
+        android:background="@color/white"
+        android:clickable="true"
+        android:drawableLeft="@drawable/itomate"
+        android:focusable="true"
+        android:gravity="center"
+        android:minHeight="48dp"
+        android:padding="10dp"
+        android:text="Buscar Alimentos"
+        android:textColor="@color/brown"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/publishFoodButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/searchFoodButton"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:background="@color/white"
+        android:text="Publicar Alimentos"
+        android:gravity="center"
+        android:padding="10dp"
+        android:textColor="@color/brown"
+        android:textStyle="bold"
+        android:clickable="true"
+        android:drawableLeft="@drawable/ibrocoli"
+        android:focusable="true"
+        android:minHeight="48dp"/>
+
+    <!-- Espacio para un tercer botón futuro -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/publishFoodButton"
+        android:layout_marginTop="16dp" />
+
+
+    <include
+        android:id="@+id/main"
+        layout="@layout/content_main" />
+</RelativeLayout>
