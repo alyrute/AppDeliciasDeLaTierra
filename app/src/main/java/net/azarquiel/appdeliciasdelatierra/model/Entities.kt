@@ -14,10 +14,10 @@ data class Usuario (
 
 ): Serializable
 
-data class Producto (
-    var idproducto: Int,
+data class Producto(
     var nombre: String,
-    var descrpcion: String,
+    var descripcion: String,
+
     var fecha: Date,
     var estado: String,
     var idcategoria: Int,

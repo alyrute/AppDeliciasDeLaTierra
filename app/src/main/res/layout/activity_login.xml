@@ -35,7 +35,9 @@
         android:layout_marginStart="30dp"
         android:layout_marginTop="33dp"
         android:layout_marginEnd="30dp"
+        android:textColor="@color/white"
         android:hint="Email"
+        android:textSize="22sp"
         android:padding="10dp"
         android:minHeight="48dp" />
 
@@ -48,8 +50,10 @@
         android:layout_marginTop="33dp"
         android:layout_marginEnd="30dp"
         android:hint="Contraseña"
+        android:textColor="@color/white"
         android:padding="10dp"
         android:minHeight="48dp"
+        android:textSize="22sp"
         android:inputType="textPassword" />
 
     <TextView
@@ -67,6 +71,7 @@
         android:textColor="@color/white"
         android:textStyle="bold"
         android:clickable="true"
+        android:textSize="22sp"
         android:focusable="true"
         android:minHeight="48dp"/>
 

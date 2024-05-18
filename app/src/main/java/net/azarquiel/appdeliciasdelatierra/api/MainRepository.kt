@@ -50,16 +50,10 @@ class MainRepository() {
         return null
     }
 
-    suspend fun getProductos(): List<Producto> {
-        val webResponse = service.getProductos().await()
-        if (webResponse.isSuccessful) {
-            return webResponse.body()!!
-        }
-        return emptyList()
-    }
 
-    suspend fun insertarProducto(producto: Producto): Producto? {
-        val webResponse = service.insertarProducto(producto).await()
+    suspend fun saveProducto(producto: Producto): Producto? {
+        val webResponse = service.saveProducto(producto).await()
+        Log.d("API Response", "Response: $producto")
         if (webResponse.isSuccessful) {
             return webResponse.body()
         }

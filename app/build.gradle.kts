@@ -71,6 +71,13 @@ android {
     implementation ("com.squareup.retrofit2:converter-gson:2.9.0")
     // Picasso
     implementation("com.squareup.picasso:picasso:2.71828")
+    //Para hacer la subida de fotos circular
+    implementation ("de.hdodenhof:circleimageview:3.1.0")
+
+    implementation ("com.github.bumptech.glide:glide:4.12.0")
+    annotationProcessor ("com.github.bumptech.glide:compiler:4.12.0")
+
+
 
 
 

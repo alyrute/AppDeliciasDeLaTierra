@@ -26,10 +26,11 @@ interface DeliciasService {
     fun insertarMensaje(@Body mensaje: Mensaje): Deferred<Response<Mensaje>>
 
     @GET("productos")
-    fun getProductos(): Deferred<Response<List<Producto>>>
+    fun getproducto(): Deferred<Response<List<Producto>>>
+
 
     @POST("producto")
-    fun insertarProducto(@Body producto: Producto): Deferred<Response<Producto>>
+    fun saveProducto(@Body producto: Producto): Deferred<Response<Producto>>
 
     @GET("login")
     fun getLogin(

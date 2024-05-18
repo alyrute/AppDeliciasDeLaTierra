@@ -3,7 +3,7 @@
     <item>
         <shape>
             <solid android:color="#B86D29" /> <!-- color de fondo -->
-            <corners android:radius="4dp" /> <!-- radio de las esquinas -->
+            <corners android:radius="35dp" /> <!-- radio de las esquinas -->
         </shape>
     </item>
 </selector>

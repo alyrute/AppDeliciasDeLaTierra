@@ -15,13 +15,19 @@ import net.azarquiel.appdeliciasdelatierra.model.Producto
 import net.azarquiel.appdeliciasdelatierra.model.Usuario
 
 class MainViewModel : ViewModel() {
-    val loginResult: MutableLiveData<Boolean> = MutableLiveData()
+
     val usuario: MutableLiveData<Usuario?> = MutableLiveData()
 
 
     private val repository = MainRepository()
 
-    fun getCategorias() = viewModelScope.launch { repository.getCategorias() }
+    fun getCategoria(): MutableLiveData<List<Categoria>> {
+        val categorias = MutableLiveData<List<Categoria>>()
+        GlobalScope.launch(Dispatchers.Main) {
+            categorias.value = repository.getCategorias()
+        }
+        return categorias
+    }
     fun insertarCategoria(categoria: Categoria) = viewModelScope.launch {
         repository.insertarCategoria(categoria)
     }
@@ -35,10 +41,12 @@ class MainViewModel : ViewModel() {
         repository.insertarMensaje(mensaje)
     }
 
-
-    fun getProductos() = viewModelScope.launch { repository.getProductos() }
-    fun insertarProducto(producto: Producto) = viewModelScope.launch {
-        repository.insertarProducto(producto)
+    fun saveProducto(producto: Producto): MutableLiveData<Producto> {
+        val productoResponse = MutableLiveData<Producto>()
+        viewModelScope.launch {
+            productoResponse.value = repository.saveProducto(producto)
+        }
+        return productoResponse
     }
 
     fun getLogin(email: String, password: String) {

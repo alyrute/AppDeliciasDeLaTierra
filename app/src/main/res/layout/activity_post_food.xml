@@ -1,26 +1,116 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
-    tools:context=".view.PostFoodActivity">
+    tools:context=".view.PostFoodActivity"
+    android:padding="20dp">
 
-    <com.google.android.material.appbar.AppBarLayout
+    <!-- Imagen del producto -->
+    <ImageView
+        android:id="@+id/imgsubirfoto"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/circular"
+        android:padding="10dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/imgpulsefoto" />
+
+    <!-- Texto "Categoría" -->
+    <TextView
+        android:id="@+id/textViewCategory"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/imgsubirfoto"
+        android:layout_marginTop="30dp"
+        android:text="Categoría"
+        android:textColor="#000000"
+        android:textSize="18sp" />
+
+    <!-- Spinner para seleccionar categoría -->
+    <Spinner
+        android:id="@+id/spinnerCategories"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fitsSystemWindows="true">
+        android:layout_below="@id/textViewCategory"
+        android:layout_marginTop="8dp"
+        android:padding="12dp"
+        android:background="@color/lightorange"/>
 
-        <com.google.android.material.appbar.MaterialToolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize" />
+    <!-- Texto "Producto" -->
+    <TextView
+        android:id="@+id/textViewProduct"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/spinnerCategories"
+        android:layout_marginTop="24dp"
+        android:text="Producto"
+        android:textColor="#000000"
+        android:textSize="18sp" />
 
-    </com.google.android.material.appbar.AppBarLayout>
+    <!-- EditText para el producto -->
+    <EditText
+        android:id="@+id/tvproducto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textViewProduct"
+        android:layout_marginTop="8dp"
+        android:hint="Producto"
+        android:inputType="text"
+        android:padding="12dp"
+        android:background="@color/lightorange"/>
 
-    <include layout="@layout/content_post_food" />
+    <!-- Texto "Descripción" -->
+    <TextView
+        android:id="@+id/textViewDescription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvproducto"
+        android:layout_marginTop="24dp"
+        android:text="Descripción"
+        android:textColor="#000000"
+        android:textSize="18sp" />
+
+    <EditText
+        android:id="@+id/tvdescipcion"
+        android:layout_width="370dp"
+        android:layout_height="117dp"
+        android:layout_below="@id/textViewDescription"
+        android:layout_marginTop="8dp"
+        android:background="@color/lightorange"
+        android:hint="Descripción"
+        android:inputType="textMultiLine"
+        android:padding="12dp" />
 
 
+    <TextView
+        android:id="@+id/publishFoodButton"
+        android:layout_width="370dp"
+        android:layout_height="58dp"
+        android:layout_below="@id/tvdescipcion"
+        android:layout_alignBottom="@+id/post"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="0dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/button"
+        android:backgroundTint="@color/green"
+        android:clickable="true"
+        android:focusable="true"
+        android:gravity="center"
+        android:minHeight="48dp"
+        android:padding="10dp"
+        android:text="SUBIR POST"
+        android:textColor="@color/white"
+        android:textStyle="bold" />
 
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+    <include
+        android:id="@+id/post"
+        layout="@layout/content_post_food" />
+
+</RelativeLayout>
+
