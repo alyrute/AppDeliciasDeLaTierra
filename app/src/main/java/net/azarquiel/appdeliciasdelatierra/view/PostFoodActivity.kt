@@ -1,10 +1,12 @@
 package net.azarquiel.appdeliciasdelatierra.view
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
+import android.util.Log
 import android.widget.ArrayAdapter
 import android.widget.Spinner
 import android.widget.Toast
@@ -26,11 +28,9 @@ import java.util.Locale
 
 class PostFoodActivity : AppCompatActivity() {
 
-
     private lateinit var binding: ActivityPostFoodBinding
-    private val PICK_IMAGE_REQUEST = 1
     private lateinit var viewModel: MainViewModel
-    private var imageUri=null
+    private var imageUri: Uri? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,27 +39,21 @@ class PostFoodActivity : AppCompatActivity() {
         setContentView(binding.root)
         viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
 
-
-        val imageView = binding.imgsubirfoto
-        imageView.setOnClickListener {
+        binding.imgsubirfoto.setOnClickListener {
             openGallery()
         }
         fetchCategories()
 
-
-        val publishFoodButton = binding.publishFoodButton
-        publishFoodButton.setOnClickListener {
+        binding.publishFoodButton.setOnClickListener {
             saveProducto()
         }
-
-
     }
-    //Logica Fotos
+
     private val galleryLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
         if (result.resultCode == Activity.RESULT_OK) {
             val data: Intent? = result.data
-            val uri: Uri? = data?.data
-            uri?.let { loadImageFromUri(it) }
+            imageUri = data?.data
+            imageUri?.let { loadImageFromUri(it) }
         }
     }
 
@@ -70,31 +64,25 @@ class PostFoodActivity : AppCompatActivity() {
 
     private fun loadImageFromUri(uri: Uri) {
         try {
-            val imageView = binding.imgsubirfoto
             Glide.with(this)
                 .load(uri)
                 .circleCrop()
-                .into(imageView)
+                .into(binding.imgsubirfoto)
         } catch (e: Exception) {
             e.printStackTrace()
         }
     }
 
-    //Logica para desplegable
-
     private fun fetchCategories() {
         viewModel.getCategoria().observe(this, Observer { categorias ->
-            val spinner: Spinner = findViewById(R.id.spinnerCategories)
             val adapter = AdapterCategorias(this, categorias)
-            spinner.adapter = adapter
+            binding.spinnerCategories.adapter = adapter
         })
     }
 
-    private fun setCategories(categories: List<String>) {
-        val spinner = binding.spinnerCategories
-        val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, categories)
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        spinner.adapter = adapter
+    private fun obtenerIdUsuario(): Int {
+        val sharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE)
+        return sharedPreferences.getInt("idusuario", -1)
     }
 
     private fun saveProducto() {
@@ -102,18 +90,28 @@ class PostFoodActivity : AppCompatActivity() {
         val descripcion = binding.tvdescipcion.text.toString()
         val fecha = Date()
         val estado = "Disponible"
+        val idusuario = obtenerIdUsuario()
         val idCategoria = (binding.spinnerCategories.selectedItem as Categoria).idcategoria
-        val imagen = imageUri?.let { uriToByteArray(it) } ?: ByteArray(0)
 
         val formatoFecha = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS", Locale.US)
         val fechaFormateada = formatoFecha.format(fecha)
 
-        val producto = Producto( nombre, descripcion, fecha, estado, idCategoria, imagen)
+        if (imageUri != null) {
+            val imagen = uriToByteArray(imageUri!!)
+            Log.d("IMAGEN", "ByteArray length: ${imagen.size}")
 
-        viewModel.saveProducto(producto).observe(this, Observer { productoGuardado ->
+            val producto = Producto(nombre, descripcion, fechaFormateada, estado, idCategoria, imagen, idusuario)
 
-            Toast.makeText(this, "Producto guardado con éxito", Toast.LENGTH_SHORT).show()
-        })
+            viewModel.saveProducto(producto).observe(this, Observer { productoGuardado ->
+                if (productoGuardado != null) {
+                    this.showToast("Producto guardado con éxito")
+                } else {
+                    this.showToast("Error al guardar el producto")
+                }
+            })
+        } else {
+            this.showToast("Por favor, selecciona una imagen para el producto")
+        }
     }
 
     private fun uriToByteArray(uri: Uri): ByteArray {
@@ -121,5 +119,9 @@ class PostFoodActivity : AppCompatActivity() {
         val byteArrayOutputStream = ByteArrayOutputStream()
         inputStream?.use { it.copyTo(byteArrayOutputStream) }
         return byteArrayOutputStream.toByteArray()
+    }
+
+    private fun Context.showToast(message: String) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 }

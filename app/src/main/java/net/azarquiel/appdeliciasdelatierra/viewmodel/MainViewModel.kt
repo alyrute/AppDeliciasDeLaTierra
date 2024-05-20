@@ -1,6 +1,4 @@
 package net.azarquiel.appdeliciasdelatierra.viewmodel
-import android.util.Log
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -13,6 +11,7 @@ import net.azarquiel.appdeliciasdelatierra.model.Intercambio
 import net.azarquiel.appdeliciasdelatierra.model.Mensaje
 import net.azarquiel.appdeliciasdelatierra.model.Producto
 import net.azarquiel.appdeliciasdelatierra.model.Usuario
+import okhttp3.MultipartBody
 
 class MainViewModel : ViewModel() {
 

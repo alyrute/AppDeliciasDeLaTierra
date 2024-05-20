@@ -43,39 +43,40 @@ android {
 
 
     dependencies {
-    implementation("org.postgresql:postgresql:42.7.3")
-    implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.appcompat)
-    implementation(libs.material)
-    implementation(libs.androidx.constraintlayout)
-    implementation(libs.androidx.navigation.fragment.ktx)
-    implementation(libs.androidx.navigation.ui.ktx)
-    implementation(libs.androidx.activity)
+        implementation("org.postgresql:postgresql:42.7.3")
+        implementation(libs.androidx.core.ktx)
+        implementation(libs.androidx.appcompat)
+        implementation(libs.material)
+        implementation(libs.androidx.constraintlayout)
+        implementation(libs.androidx.navigation.fragment.ktx)
+        implementation(libs.androidx.navigation.ui.ktx)
+        implementation(libs.androidx.activity)
         implementation(libs.androidx.databinding.runtime)
 
         testImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.junit)
-    androidTestImplementation(libs.androidx.espresso.core)
+        androidTestImplementation(libs.androidx.junit)
+        androidTestImplementation(libs.androidx.espresso.core)
 
-    // ArchLifecycle
-    implementation("androidx.lifecycle:lifecycle-extensions:2.2.0")
-    kapt ("androidx.lifecycle:lifecycle-compiler:2.2.0")
-    //Retrofit2
-    implementation("com.squareup.retrofit2:retrofit:2.9.0")
-    implementation("com.squareup.retrofit2:converter-moshi:2.9.0")
-    implementation("com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:0.9.2")
-    //Kotlin Coroutines
-    implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
-    implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3")
-    // Retrofit2-Gson
-    implementation ("com.squareup.retrofit2:converter-gson:2.9.0")
-    // Picasso
-    implementation("com.squareup.picasso:picasso:2.71828")
-    //Para hacer la subida de fotos circular
-    implementation ("de.hdodenhof:circleimageview:3.1.0")
+        // ArchLifecycle
+        implementation("androidx.lifecycle:lifecycle-extensions:2.2.0")
+        kapt ("androidx.lifecycle:lifecycle-compiler:2.2.0")
+        //Retrofit2
+        implementation("com.squareup.retrofit2:retrofit:2.9.0")
+        implementation("com.squareup.retrofit2:converter-moshi:2.9.0")
+        implementation("com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:0.9.2")
+        //Kotlin Coroutines
+        implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
+        implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3")
+        // Retrofit2-Gson
+        implementation ("com.squareup.retrofit2:converter-gson:2.9.0")
+        // Picasso
+        implementation("com.squareup.picasso:picasso:2.71828")
+        //Para hacer la subida de fotos circular
+        implementation ("de.hdodenhof:circleimageview:3.1.0")
 
-    implementation ("com.github.bumptech.glide:glide:4.12.0")
-    annotationProcessor ("com.github.bumptech.glide:compiler:4.12.0")
+        implementation ("com.github.bumptech.glide:glide:4.12.0")
+        annotationProcessor ("com.github.bumptech.glide:compiler:4.12.0")
+
 
 
 

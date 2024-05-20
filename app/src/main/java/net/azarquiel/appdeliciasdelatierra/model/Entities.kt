@@ -17,13 +17,12 @@ data class Usuario (
 data class Producto(
     var nombre: String,
     var descripcion: String,
-
-    var fecha: Date,
+    var fecha: String,
     var estado: String,
     var idcategoria: Int,
-    var imagen: ByteArray
-
-): Serializable
+    val imagen: ByteArray,
+    var idusuario: Int,
+    ): Serializable
 
 data class Categoria (
     var idcategoria: Int,
