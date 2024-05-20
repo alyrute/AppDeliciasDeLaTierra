@@ -1,5 +1,6 @@
 package net.azarquiel.appdeliciasdelatierra.model
 
+import android.util.Base64
 import java.io.Serializable
 import java.util.Date
 
@@ -20,9 +21,13 @@ data class Producto(
     var fecha: String,
     var estado: String,
     var idcategoria: Int,
-    val imagen: ByteArray,
+    var imagen: String,
     var idusuario: Int,
-    ): Serializable
+    ): Serializable{
+    fun getImagenByteArray(): ByteArray {
+        return Base64.decode(imagen, Base64.DEFAULT)
+    }
+    }
 
 data class Categoria (
     var idcategoria: Int,

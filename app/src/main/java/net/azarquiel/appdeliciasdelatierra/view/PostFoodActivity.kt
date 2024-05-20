@@ -25,6 +25,7 @@ import java.io.ByteArrayOutputStream
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
+import android.util.Base64
 
 class PostFoodActivity : AppCompatActivity() {
 
@@ -98,13 +99,15 @@ class PostFoodActivity : AppCompatActivity() {
 
         if (imageUri != null) {
             val imagen = uriToByteArray(imageUri!!)
+            val imagenBase64 = Base64.encodeToString(imagen, Base64.DEFAULT) // Convertir a Base64
             Log.d("IMAGEN", "ByteArray length: ${imagen.size}")
 
-            val producto = Producto(nombre, descripcion, fechaFormateada, estado, idCategoria, imagen, idusuario)
+            val producto = Producto(nombre, descripcion, fechaFormateada, estado, idCategoria, imagenBase64, idusuario) // Usar imagenBase64
 
             viewModel.saveProducto(producto).observe(this, Observer { productoGuardado ->
                 if (productoGuardado != null) {
                     this.showToast("Producto guardado con éxito")
+                    navigateToMain()
                 } else {
                     this.showToast("Error al guardar el producto")
                 }
@@ -123,5 +126,11 @@ class PostFoodActivity : AppCompatActivity() {
 
     private fun Context.showToast(message: String) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+    }
+
+    private fun navigateToMain() {
+        val intent = Intent(this, MainActivity::class.java)
+        startActivity(intent)
+        finish()
     }
 }
