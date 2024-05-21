@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,10 +8,40 @@
     android:fitsSystemWindows="true"
     tools:context=".view.SearcherFoodActivity">
 
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:layout_marginTop="10dp"
+        app:cardBackgroundColor="@color/orange"
+        app:cardCornerRadius="10dp"
+        app:layout_constraintEnd_toStartOf="@+id/search"
+        app:layout_constraintStart_toEndOf="@+id/search"
+        app:layout_constraintTop_toTopOf="parent">
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="376dp"
-        android:layout_height="213dp"
-        android:text="Search" />
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/search_field"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:hint="Buscar..."
+                android:padding="10dp"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white" />
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+
+    <include
+        android:id="@+id/search"
+        layout="@layout/content_searcher_food"
+        />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
