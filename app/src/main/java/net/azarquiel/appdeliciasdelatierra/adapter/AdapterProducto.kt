@@ -1,4 +1,5 @@
 package net.azarquiel.appdeliciasdelatierra.adapter
+
 import android.content.Context
 import android.graphics.BitmapFactory
 import android.text.Html
@@ -12,14 +13,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import net.azarquiel.appdeliciasdelatierra.R
 import net.azarquiel.appdeliciasdelatierra.model.Producto
-
-
-/**
- * Created by pacopulido on 9/10/18.
- */
 class AdapterProducto(val context: Context,
                       val layout: Int
-                    ) : RecyclerView.Adapter<AdapterProducto.ViewHolder>() {
+) : RecyclerView.Adapter<AdapterProducto.ViewHolder>() {
 
     private var dataList: List<Producto> = emptyList()
 

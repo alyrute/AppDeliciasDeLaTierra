@@ -8,7 +8,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import net.azarquiel.appdeliciasdelatierra.R
 import net.azarquiel.appdeliciasdelatierra.adapter.AdapterProducto
-import net.azarquiel.appdeliciasdelatierra.databinding.ActivityPostFoodBinding
 import net.azarquiel.appdeliciasdelatierra.databinding.ActivitySearcherFoodBinding
 import net.azarquiel.appdeliciasdelatierra.model.Producto
 import net.azarquiel.appdeliciasdelatierra.viewmodel.MainViewModel

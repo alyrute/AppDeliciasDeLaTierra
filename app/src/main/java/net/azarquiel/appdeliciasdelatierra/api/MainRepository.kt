@@ -1,7 +1,5 @@
 package net.azarquiel.appdeliciasdelatierra.api
 
-import android.util.Base64
-import android.util.Log
 import net.azarquiel.appdeliciasdelatierra.model.Categoria
 import net.azarquiel.appdeliciasdelatierra.model.Intercambio
 import net.azarquiel.appdeliciasdelatierra.model.Mensaje
@@ -77,6 +75,14 @@ class MainRepository() {
         return null
     }
 
+    suspend fun getUsuarios(): List<Usuario>? {
+        val webResponse = service.getUsuarios().await()
+        return if (webResponse.isSuccessful) {
+            webResponse.body()
+        } else {
+            null
+        }
+    }
     suspend fun register(usuario: Usuario): Usuario? {
         val webResponse = service.register(usuario).await()
         if (webResponse.isSuccessful) {
@@ -101,5 +107,9 @@ class MainRepository() {
         }
         return emptyList()
     }
+
+
+
+
 }
 

@@ -12,11 +12,15 @@ import net.azarquiel.appdeliciasdelatierra.model.Intercambio
 import net.azarquiel.appdeliciasdelatierra.model.Mensaje
 import net.azarquiel.appdeliciasdelatierra.model.Producto
 import net.azarquiel.appdeliciasdelatierra.model.Usuario
-import okhttp3.MultipartBody
+
 
 class MainViewModel : ViewModel() {
 
+
+
     val usuario: MutableLiveData<Usuario?> = MutableLiveData()
+    private val _productos = MutableLiveData<List<Producto>>() // Declaración de _productos
+    val productos: LiveData<List<Producto>> = _productos
 
 
     private val repository = MainRepository()
@@ -49,7 +53,7 @@ class MainViewModel : ViewModel() {
         return productoResponse
     }
 
-   fun getProductos(): MutableLiveData<List<Producto>> {
+    fun getProductos(): MutableLiveData<List<Producto>> {
         val productos = MutableLiveData<List<Producto>>()
         GlobalScope.launch(Dispatchers.Main) {
             productos.value = repository.getProductos()
@@ -75,8 +79,9 @@ class MainViewModel : ViewModel() {
 
 
     fun enviarMensaje(mensaje: Mensaje) = viewModelScope.launch {
-    repository.enviarMensaje(mensaje)
+        repository.enviarMensaje(mensaje)
     }
 
     fun recibirMensajes(idUsuario: Int) = viewModelScope.launch { repository.recibirMensajes(idUsuario) }
+
 }

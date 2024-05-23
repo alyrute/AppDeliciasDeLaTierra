@@ -4,7 +4,6 @@ import net.azarquiel.appdeliciasdelatierra.model.Categoria
 import net.azarquiel.appdeliciasdelatierra.model.Intercambio
 import net.azarquiel.appdeliciasdelatierra.model.Mensaje
 import net.azarquiel.appdeliciasdelatierra.model.Producto
-import net.azarquiel.appdeliciasdelatierra.model.Respuesta
 import net.azarquiel.appdeliciasdelatierra.model.Usuario
 import retrofit2.Response
 import retrofit2.http.*
@@ -37,6 +36,9 @@ interface DeliciasService {
         @Query("email") email: String,
         @Query("password") password: String): Deferred<Response<Usuario>>
 
+    @GET("usuarios")
+    fun getUsuarios(): Deferred<Response<List<Usuario>>>
+
     @POST("register")
     fun register(@Body usuario: Usuario): Deferred<Response<Usuario>>
 
@@ -47,6 +49,4 @@ interface DeliciasService {
     fun recibirMensajes(@Path("idUsuario") idUsuario: Int): Deferred<Response<List<Mensaje>>>
 
 
-
-
-}
+    }

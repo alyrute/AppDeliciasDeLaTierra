@@ -7,14 +7,17 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import net.azarquiel.appdeliciasdelatierra.databinding.ActivityLoginBinding
+import net.azarquiel.appdeliciasdelatierra.model.Usuario
 import net.azarquiel.appdeliciasdelatierra.view.MainActivity
 import net.azarquiel.appdeliciasdelatierra.view.RegisterActivity
+import net.azarquiel.appdeliciasdelatierra.view.SearcherFoodActivity
 import net.azarquiel.appdeliciasdelatierra.viewmodel.MainViewModel
 
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
     private lateinit var viewModel: MainViewModel
+    private var usuario: Usuario?=null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -79,4 +82,6 @@ class LoginActivity : AppCompatActivity() {
             Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
         }
     }
+
+
 }
