@@ -6,13 +6,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
+    android:paddingTop="15dp"
     tools:context=".view.SearcherFoodActivity">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="30dp"
         app:cardBackgroundColor="@color/orange"
         app:cardCornerRadius="10dp"
         app:layout_constraintEnd_toStartOf="@+id/search"
