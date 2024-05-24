@@ -67,7 +67,7 @@ class LoginActivity : AppCompatActivity() {
         viewModel.getLogin(email, password)
         viewModel.usuario.observe(this, Observer { usuario ->
             if (usuario != null) {
-                saveUserDetails(usuario)
+                usuario.idusuario?.let { saveUserDetails(usuario.nombre, it) }
                 navigateToMain()
             } else {
                 showToast("Credenciales incorrectas")
@@ -75,17 +75,14 @@ class LoginActivity : AppCompatActivity() {
         })
     }
 
-    private fun saveUserDetails(usuario: Usuario) {
+    private fun saveUserDetails(nombre: String, idusuario: Int) {
         val sharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE)
         val editor = sharedPreferences.edit()
-        editor.putString("nombre", usuario.nombre)
-        editor.putString("apellidos", usuario.apellidos)
-        editor.putString("poblacion", usuario.poblacion)
-        editor.putString("email", usuario.email)
-        editor.putString("password", usuario.password)
-        editor.putString("provincia", usuario.provincia)
+        editor.putString("username", nombre)
+        editor.putInt("idusuario", idusuario)
         editor.apply()
     }
+
 
     private fun checkIfLoggedIn() {
         val sharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE)

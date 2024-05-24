@@ -2,7 +2,6 @@ package net.azarquiel.appdeliciasdelatierra.adapter
 
 import android.content.Context
 import android.graphics.BitmapFactory
-import android.text.Html
 import android.util.Base64
 import android.view.LayoutInflater
 import android.view.View
@@ -10,7 +9,6 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.squareup.picasso.Picasso
 import net.azarquiel.appdeliciasdelatierra.R
 import net.azarquiel.appdeliciasdelatierra.model.Categoria
 import net.azarquiel.appdeliciasdelatierra.model.Producto
@@ -41,6 +39,18 @@ class AdapterCategorias(val context: Context,
 
     class ViewHolder(viewlayout: View, val context: Context) : RecyclerView.ViewHolder(viewlayout) {
         fun bind(dataItem: Categoria){
+
+            val ivrowcategoria = itemView.findViewById(R.id.ivrowcategoria) as ImageView
+            val tvrownombrecategoria = itemView.findViewById(R.id.tvrownombrecategoria) as TextView
+
+
+            tvrownombrecategoria.text = dataItem.nombre
+
+
+            val base64Image = dataItem.imagen
+            val decodedBytes = Base64.decode(base64Image, Base64.DEFAULT)
+            val bitmap = BitmapFactory.decodeByteArray(decodedBytes, 0, decodedBytes.size)
+            ivrowcategoria.setImageBitmap(bitmap)
 
 
 

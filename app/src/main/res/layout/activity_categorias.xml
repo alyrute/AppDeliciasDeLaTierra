@@ -14,12 +14,14 @@
 
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/toolbar"
+            app:title="Categorias"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <include layout="@layout/content_categorias" />
+    <include layout="@layout/content_categorias"
+        android:id="@+id/cat"/>
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

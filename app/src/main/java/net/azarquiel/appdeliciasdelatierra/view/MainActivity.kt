@@ -33,7 +33,7 @@ class MainActivity : AppCompatActivity() {
 
         val searchFoodButton = binding.searchFoodButton
         searchFoodButton.setOnClickListener {
-            val intent = Intent(this, SearcherFoodActivity::class.java)
+            val intent = Intent(this, CategoriasActivity::class.java)
             startActivity(intent)
         }
 

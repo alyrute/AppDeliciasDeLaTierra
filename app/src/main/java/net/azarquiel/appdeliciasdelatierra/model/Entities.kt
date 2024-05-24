@@ -33,7 +33,8 @@ data class Producto(
 
 data class Categoria (
     var idcategoria: Int,
-    var nombre: String
+    var nombre: String,
+    var imagen:String,
 
 ): Serializable
 
