@@ -1,6 +1,9 @@
 package net.azarquiel.appdeliciasdelatierra.view
 
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
+import android.view.View
 import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
@@ -30,7 +33,11 @@ class CategoriasActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         binding = ActivityCategoriasBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+
         viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
         initRV()
         getCategoria()
@@ -48,5 +55,12 @@ class CategoriasActivity : AppCompatActivity() {
         adapter = AdapterCategorias(this, R.layout.rowcategoria)
         binding.cat.rvcategoria.adapter = adapter
         binding.cat.rvcategoria.layoutManager = LinearLayoutManager(this)
+    }
+
+    fun onClickCategoria(v: View){
+        val categoriaPulsada = v.tag as Categoria
+        val intent = Intent(this, SearcherFoodActivity::class.java)
+        intent.putExtra("categoria", categoriaPulsada)
+        startActivity(intent)
     }
 }

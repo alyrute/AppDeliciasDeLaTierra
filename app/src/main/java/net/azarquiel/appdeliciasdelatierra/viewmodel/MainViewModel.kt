@@ -4,6 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import net.azarquiel.appdeliciasdelatierra.api.MainRepository
@@ -19,7 +20,7 @@ class MainViewModel : ViewModel() {
 
 
     val usuario: MutableLiveData<Usuario?> = MutableLiveData()
-    private val _productos = MutableLiveData<List<Producto>>() // Declaración de _productos
+    private val _productos = MutableLiveData<List<Producto>>()
     val productos: LiveData<List<Producto>> = _productos
 
 
@@ -32,9 +33,15 @@ class MainViewModel : ViewModel() {
         }
         return categorias
     }
-    fun insertarCategoria(categoria: Categoria) = viewModelScope.launch {
-        repository.insertarCategoria(categoria)
+    fun getProductosPorCategoria(idcategoria:Int): MutableLiveData<List<Producto>> {
+        val productos = MutableLiveData<List<Producto>>()
+        GlobalScope.launch(Main) {
+            productos.value = repository.getProductosPorCategoria(idcategoria)
+        }
+        return productos
     }
+
+
 
     fun getIntercambios() = viewModelScope.launch { repository.getIntercambios() }
     fun insertarIntercambio(intercambio: Intercambio) = viewModelScope.launch {

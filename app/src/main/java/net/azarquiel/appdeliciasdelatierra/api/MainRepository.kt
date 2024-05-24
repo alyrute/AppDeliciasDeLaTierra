@@ -1,10 +1,12 @@
 package net.azarquiel.appdeliciasdelatierra.api
 
+import android.util.Log
 import net.azarquiel.appdeliciasdelatierra.model.Categoria
 import net.azarquiel.appdeliciasdelatierra.model.Intercambio
 import net.azarquiel.appdeliciasdelatierra.model.Mensaje
 import net.azarquiel.appdeliciasdelatierra.model.Producto
 import net.azarquiel.appdeliciasdelatierra.model.Usuario
+
 
 
 class MainRepository() {
@@ -17,13 +19,19 @@ class MainRepository() {
         }
         return emptyList()
     }
-    suspend fun insertarCategoria(categoria: Categoria): Categoria? {
-        val webResponse = service.insertarCategoria(categoria).await()
+
+
+    suspend fun getProductosPorCategoria(idcategoria:Int): List<Producto> {
+        val webResponse = service.getProductosPorCategoria(idcategoria).await()
         if (webResponse.isSuccessful) {
-            return webResponse.body()
+            return webResponse.body()!!.producto
+        } else {
+            Log.d("API_ERROR", "Response Code: ${webResponse.code()}")
+            Log.d("API_ERROR", "Error Body: ${webResponse.errorBody()?.string()}")
         }
-        return null
+        return emptyList()
     }
+
 
     suspend fun getIntercambios(): List<Intercambio> {
         val webResponse = service.getIntercambios().await()

@@ -23,18 +23,13 @@ data class Producto(
     var idcategoria: Int,
     var imagen: String,
     var idusuario: Int,
-    ): Serializable{
+    ): Serializable
 
-
-    fun getImagenByteArray(): ByteArray {
-        return Base64.decode(imagen, Base64.DEFAULT)
-    }
-    }
 
 data class Categoria (
     var idcategoria: Int,
     var nombre: String,
-    var imagen:String,
+    var imagen:String
 
 ): Serializable
 
@@ -59,7 +54,7 @@ data class Mensaje (
 
 data class Respuesta (
     var usuario: Usuario,
-    var producto: Producto,
+    var producto: List<Producto>,
     var categoria: Categoria,
     var intercambio: Intercambio,
     var mensaje: Mensaje,

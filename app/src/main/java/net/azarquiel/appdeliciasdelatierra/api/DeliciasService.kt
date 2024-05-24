@@ -4,6 +4,7 @@ import net.azarquiel.appdeliciasdelatierra.model.Categoria
 import net.azarquiel.appdeliciasdelatierra.model.Intercambio
 import net.azarquiel.appdeliciasdelatierra.model.Mensaje
 import net.azarquiel.appdeliciasdelatierra.model.Producto
+import net.azarquiel.appdeliciasdelatierra.model.Respuesta
 import net.azarquiel.appdeliciasdelatierra.model.Usuario
 import retrofit2.Response
 import retrofit2.http.*
@@ -12,8 +13,9 @@ interface DeliciasService {
     @GET("categorias")
     fun getCategorias(): Deferred<Response<List<Categoria>>>
 
-    @POST("categoria")
-    fun insertarCategoria(@Body categoria: Categoria): Deferred<Response<Categoria>>
+     @GET("categoria/{idcategoria}/producto")
+    fun getProductosPorCategoria(@Path("idcategoria") idcategoria: Int): Deferred<Response<Respuesta>>
+
 
     @GET("intercambios")
     fun getIntercambios(): Deferred<Response<List<Intercambio>>>
