@@ -71,15 +71,7 @@ class MainActivity : AppCompatActivity() {
         finish()
     }
 
-    private fun navigateToMain(nombre: String, poblacion: String, provincia: String) {
-        val intent = Intent(this, SearcherFoodActivity::class.java).apply {
-            putExtra("nombrePersona", nombre)
-            putExtra("poblacion", poblacion)
-            putExtra("provincia", provincia)
-        }
-        startActivity(intent)
-        finish()
-    }
+
 
 
 }

@@ -12,12 +12,16 @@ import net.azarquiel.appdeliciasdelatierra.view.MainActivity
 import net.azarquiel.appdeliciasdelatierra.view.RegisterActivity
 import net.azarquiel.appdeliciasdelatierra.view.SearcherFoodActivity
 import net.azarquiel.appdeliciasdelatierra.viewmodel.MainViewModel
+import android.content.SharedPreferences
+
 
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
     private lateinit var viewModel: MainViewModel
     private var usuario: Usuario?=null
+    private lateinit var sh: SharedPreferences
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,7 +30,20 @@ class LoginActivity : AppCompatActivity() {
 
         viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
 
+        checkLogin()
         setupViews()
+
+
+    }
+
+    private fun checkLogin() {
+        val sharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE)
+        val username = sharedPreferences.getString("username", null)
+        val idusuario = sharedPreferences.getInt("idusuario", -1)
+
+        if (username != null && idusuario != -1) {
+            navigateToMain()
+        }
     }
 
     private fun setupViews() {
@@ -66,6 +83,16 @@ class LoginActivity : AppCompatActivity() {
         editor.apply()
     }
 
+    private fun checkIfLoggedIn() {
+        val sharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE)
+        val username = sharedPreferences.getString("username", null)
+        val idusuario = sharedPreferences.getInt("idusuario", -1)
+
+        if (username != null && idusuario != -1) {
+            navigateToMain()
+        }
+    }
+
     private fun navigateToMain() {
         val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
@@ -82,6 +109,8 @@ class LoginActivity : AppCompatActivity() {
             Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
         }
     }
+
+
 
 
 }

@@ -7,16 +7,13 @@ import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
-import android.widget.ArrayAdapter
-import android.widget.Spinner
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
-import net.azarquiel.appdeliciasdelatierra.R
-import net.azarquiel.appdeliciasdelatierra.adapter.AdapterCategorias
+import net.azarquiel.appdeliciasdelatierra.adapter.AdapterListaCategorias
 import net.azarquiel.appdeliciasdelatierra.databinding.ActivityPostFoodBinding
 import net.azarquiel.appdeliciasdelatierra.model.Categoria
 import net.azarquiel.appdeliciasdelatierra.model.Producto
@@ -76,7 +73,7 @@ class PostFoodActivity : AppCompatActivity() {
 
     private fun fetchCategories() {
         viewModel.getCategoria().observe(this, Observer { categorias ->
-            val adapter = AdapterCategorias(this, categorias)
+            val adapter = AdapterListaCategorias(this, categorias)
             binding.spinnerCategories.adapter = adapter
         })
     }

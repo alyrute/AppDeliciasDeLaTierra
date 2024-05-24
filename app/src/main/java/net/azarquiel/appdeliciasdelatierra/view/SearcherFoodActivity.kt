@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import net.azarquiel.appdeliciasdelatierra.R
 import net.azarquiel.appdeliciasdelatierra.adapter.AdapterProducto
 import net.azarquiel.appdeliciasdelatierra.databinding.ActivitySearcherFoodBinding
@@ -30,9 +29,6 @@ class SearcherFoodActivity : AppCompatActivity() {
         initRV()
         getProductos()
 
-
-
-
     }
 
     private fun getProductos() {
@@ -46,10 +42,11 @@ class SearcherFoodActivity : AppCompatActivity() {
     }
 
     private fun initRV() {
-        adapter = AdapterProducto(this, R.layout.row_producto)
+        adapter = AdapterProducto(this, R.layout.rowproducto)
         binding.search.rvproducto.adapter = adapter
         binding.search.rvproducto.layoutManager = LinearLayoutManager(this)
     }
+
 
 
 }

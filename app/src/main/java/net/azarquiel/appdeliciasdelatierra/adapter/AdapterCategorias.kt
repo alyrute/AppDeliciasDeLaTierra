@@ -1,47 +1,52 @@
 package net.azarquiel.appdeliciasdelatierra.adapter
 
 import android.content.Context
+import android.graphics.BitmapFactory
+import android.text.Html
+import android.util.Base64
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
+import net.azarquiel.appdeliciasdelatierra.R
 import net.azarquiel.appdeliciasdelatierra.model.Categoria
+import net.azarquiel.appdeliciasdelatierra.model.Producto
+class AdapterCategorias(val context: Context,
+                        val layout: Int) : RecyclerView.Adapter<AdapterCategorias.ViewHolder>() {
 
-
-/**
- * Created by pacopulido on 9/10/18.
- */
-class AdapterCategorias(context: Context, categorias: List<Categoria>) : ArrayAdapter<Categoria>(context, android.R.layout.simple_spinner_item, categorias) {
-
-    override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
-        var view = convertView
-        if (view == null) {
-            val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-            view = inflater.inflate(android.R.layout.simple_spinner_item, null)
-        }
-
-        val item = getItem(position)
-        val tv = view?.findViewById<TextView>(android.R.id.text1)
-        tv?.text = item?.nombre
-
-        return view!!
+    private var dataList: List<Categoria> = emptyList()
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        val layoutInflater = LayoutInflater.from(parent.context)
+        val viewlayout = layoutInflater.inflate(layout, parent, false)
+        return ViewHolder(viewlayout, context)
     }
 
-    override fun getDropDownView(position: Int, convertView: View?, parent: ViewGroup): View {
-        var view = convertView
-        if (view == null) {
-            val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-            view = inflater.inflate(android.R.layout.simple_spinner_dropdown_item, null)
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        val item = dataList[position]
+        holder.bind(item)
+    }
+
+    override fun getItemCount(): Int {
+        return dataList.size
+    }
+
+    internal fun setCategoria (categorias: List<Categoria>) {
+        this.dataList = categorias
+        notifyDataSetChanged()
+    }
+
+
+    class ViewHolder(viewlayout: View, val context: Context) : RecyclerView.ViewHolder(viewlayout) {
+        fun bind(dataItem: Categoria){
+
+
+
+
+            itemView.tag = dataItem
         }
 
-        val item = getItem(position)
-        val tv = view?.findViewById<TextView>(android.R.id.text1)
-        tv?.text = item?.nombre
-
-        return view!!
     }
 }
