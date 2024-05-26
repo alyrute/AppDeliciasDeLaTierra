@@ -12,6 +12,7 @@ import net.azarquiel.appdeliciasdelatierra.view.MainActivity
 import net.azarquiel.appdeliciasdelatierra.view.RegisterActivity
 import net.azarquiel.appdeliciasdelatierra.viewmodel.MainViewModel
 import android.content.SharedPreferences
+import android.util.Log
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
@@ -108,7 +109,6 @@ class LoginActivity : AppCompatActivity() {
             Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
         }
     }
-
 
 
 

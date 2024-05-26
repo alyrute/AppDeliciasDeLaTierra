@@ -13,6 +13,7 @@ import net.azarquiel.appdeliciasdelatierra.R
 import net.azarquiel.appdeliciasdelatierra.model.Producto
 class AdapterProducto(val context: Context,
                       val layout: Int
+
 ) : RecyclerView.Adapter<AdapterProducto.ViewHolder>() {
 
     private var dataList: List<Producto> = emptyList()

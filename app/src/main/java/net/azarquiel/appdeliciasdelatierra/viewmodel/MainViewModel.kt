@@ -53,8 +53,6 @@ class MainViewModel : ViewModel() {
         return respuesta
     }
 
-
-
     fun getIntercambios() = viewModelScope.launch { repository.getIntercambios() }
     fun insertarIntercambio(intercambio: Intercambio) = viewModelScope.launch {
         repository.insertarIntercambio(intercambio)
@@ -64,10 +62,10 @@ class MainViewModel : ViewModel() {
         repository.insertarMensaje(mensaje)
     }
 
-    fun getProductos(): MutableLiveData<List<Producto>> {
-        val productos = MutableLiveData<List<Producto>>()
+    fun getProductos(idusuario:Int): MutableLiveData<Producto?> {
+        val productos = MutableLiveData<Producto?>()
         GlobalScope.launch(Dispatchers.Main) {
-            productos.value = repository.getProductos()
+            productos.value = repository.getProductos(idusuario)
         }
         return productos
     }

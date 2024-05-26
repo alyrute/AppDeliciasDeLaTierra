@@ -27,8 +27,8 @@ class MainRepository() {
         return emptyList()
     }
 
-    suspend fun getProductos(): List<Producto>? {
-        val webResponse = service.getProductos().await()
+    suspend fun getProductos(idusuario:Int): Producto? {
+        val webResponse = service.getProductos(idusuario).await()
         return if (webResponse.isSuccessful) {
             webResponse.body()
         } else {
@@ -45,17 +45,11 @@ class MainRepository() {
     }
 
     suspend fun getUsuarioByProducto(idproducto:Int): Usuario? {
-        println("Obteniendo usuario para el producto: $idproducto")
         val webResponse = service.getUsuarioByProducto(idproducto).await()
-        println("Respuesta recibida: $webResponse")
         if (webResponse.isSuccessful) {
-            println("La respuesta fue exitosa. Procesando...")
             val usuario = webResponse.body()
-            println("Usuario obtenido: $usuario")
-            println("Cuerpo completo de la respuesta: ${webResponse.body()}")
             return usuario
         }
-        println("La respuesta no fue exitosa. Devolviendo null.")
         return null
     }
 

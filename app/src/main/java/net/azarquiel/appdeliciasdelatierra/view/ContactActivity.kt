@@ -39,11 +39,9 @@ class ContactActivity : AppCompatActivity() {
         producto = intent.getSerializableExtra("producto") as Producto
 
         viewModel.getUsuarioByProducto(producto.idproducto!!).observe(this, Observer { usuario ->
-            // Comprobamos si el usuario es null
+
             if (usuario != null) {
-                // Actualizamos el TextView con el nombre del usuario
                 binding.contacNombe.text = usuario.nombre
-                // Actualizamos el TextView con la población y la provincia del usuario
                 binding.contacPobPro.text = "${usuario.poblacion}, ${usuario.provincia}"
             }
         })

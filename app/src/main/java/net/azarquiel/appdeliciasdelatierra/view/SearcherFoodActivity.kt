@@ -27,7 +27,7 @@ class SearcherFoodActivity : AppCompatActivity() {
     private lateinit var viewModel: MainViewModel
     private lateinit var categoria: Categoria
 
-    private var usuario: Usuario?=null
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,38 +35,47 @@ class SearcherFoodActivity : AppCompatActivity() {
         binding = ActivitySearcherFoodBinding.inflate(layoutInflater)
         setContentView(binding.root)
         categoria = intent.getSerializableExtra("categoria") as Categoria
+        viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
 
         initRV()
-        getProductos()
+        searchProducto()
+        checkLogin()
 
+
+    }
+    private fun checkLogin() {
+        val sharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE)
+        val idusuario = sharedPreferences.getInt("idusuario", -1)
+
+        if (idusuario != -1) {
+            getProductos(idusuario)
+        }
+    }
+
+    private fun searchProducto() {
         val searchField = findViewById<EditText>(R.id.search_field)
         searchField.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable) {
                 onQueryTextChange(s.toString())
             }
-
             override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {
 
             }
-
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
-
             }
         })
     }
 
-    private fun getProductos() {
-        viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
-        viewModel.getProductosPorCategoria(categoria.idcategoria).observe(this, Observer {
-            it?.let{
-                Log.d("PRODUCTOS", "$it")
-                producto = it
-                adapter.setProducto(it)
+    private fun getProductos(idusuario: Int) {
+        viewModel.getProductosPorCategoria(categoria.idcategoria).observe(this, Observer { productos ->
+            productos?.let {
+                // Filtra los productos para excluir los del usuario conectado
+                val productosFiltrados = it.filter { producto -> producto.idusuario != idusuario }
+                producto = productosFiltrados
+                adapter.setProducto(productosFiltrados)
             }
         })
     }
-
-
 
     private fun initRV() {
         adapter = AdapterProducto(this, R.layout.rowproducto)

@@ -16,8 +16,8 @@ interface DeliciasService {
      @GET("categoria/{idcategoria}/producto")
     fun getProductosPorCategoria(@Path("idcategoria") idcategoria: Int): Deferred<Response<Respuesta>>
 
-    @GET("productos")
-    fun getProductos(): Deferred<Response<List<Producto>>>
+    @GET("producto")
+    suspend fun getProductos(@Query("idusuario") idusuario: Int): Deferred<Response<Producto>>
 
     @POST("producto")
     fun saveProducto(@Body producto: Producto): Deferred<Response<Producto>>
