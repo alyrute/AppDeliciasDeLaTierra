@@ -6,6 +6,7 @@
     android:layout_height="wrap_content"
     android:onClick="onClickProducto"
     android:layout_margin="2dp"
+    android:layout_gravity="center_horizontal"
     card_view:cardBackgroundColor="@color/white"
     card_view:cardCornerRadius="16dp"
     card_view:cardElevation="1dp"

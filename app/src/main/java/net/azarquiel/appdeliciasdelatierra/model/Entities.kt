@@ -16,6 +16,7 @@ data class Usuario (
 ): Serializable
 
 data class Producto(
+    val idproducto: Int? = null,
     var nombre: String,
     var descripcion: String,
     var fecha: String,
@@ -49,11 +50,12 @@ data class Mensaje (
     var idusuario2: Int,
     var texto: String,
     var fecha: Date,
+    var leido: Boolean
 
     ): Serializable
 
 data class Respuesta (
-    var usuario: Usuario,
+    var usuario: Usuario?,
     var producto: List<Producto>,
     var categoria: Categoria,
     var intercambio: Intercambio,

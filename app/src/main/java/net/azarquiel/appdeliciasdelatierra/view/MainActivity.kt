@@ -10,11 +10,14 @@ import androidx.appcompat.widget.Toolbar
 import net.azarquiel.appdeliciasdelatierra.LoginActivity
 import net.azarquiel.appdeliciasdelatierra.R
 import net.azarquiel.appdeliciasdelatierra.databinding.ActivityMainBinding
+import net.azarquiel.appdeliciasdelatierra.model.Categoria
+import net.azarquiel.appdeliciasdelatierra.model.Usuario
 
 class MainActivity : AppCompatActivity() {
 
 
     private lateinit var binding: ActivityMainBinding
+    private lateinit var usuario: Usuario
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,6 +27,7 @@ class MainActivity : AppCompatActivity() {
 
         val toolbar: Toolbar = binding.myToolbar
         setSupportActionBar(toolbar)
+
 
         val sharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE)
         val username = sharedPreferences.getString("username", "Usuario")

@@ -12,17 +12,13 @@ import net.azarquiel.appdeliciasdelatierra.model.Categoria
 import net.azarquiel.appdeliciasdelatierra.model.Intercambio
 import net.azarquiel.appdeliciasdelatierra.model.Mensaje
 import net.azarquiel.appdeliciasdelatierra.model.Producto
+import net.azarquiel.appdeliciasdelatierra.model.Respuesta
 import net.azarquiel.appdeliciasdelatierra.model.Usuario
 
 
 class MainViewModel : ViewModel() {
 
-
-
     val usuario: MutableLiveData<Usuario?> = MutableLiveData()
-    private val _productos = MutableLiveData<List<Producto>>()
-    val productos: LiveData<List<Producto>> = _productos
-
 
     private val repository = MainRepository()
 
@@ -41,6 +37,22 @@ class MainViewModel : ViewModel() {
         return productos
     }
 
+    fun saveProducto(producto: Producto): MutableLiveData<Producto> {
+        val productoResponse = MutableLiveData<Producto>()
+        viewModelScope.launch {
+            productoResponse.value = repository.saveProducto(producto)
+        }
+        return productoResponse
+    }
+
+    fun getUsuarioByProducto(idproducto: Int): MutableLiveData<Usuario?> {
+        val respuesta = MutableLiveData<Usuario?>()
+        GlobalScope.launch(Main) {
+            respuesta.value = repository.getUsuarioByProducto(idproducto)
+        }
+        return respuesta
+    }
+
 
 
     fun getIntercambios() = viewModelScope.launch { repository.getIntercambios() }
@@ -50,14 +62,6 @@ class MainViewModel : ViewModel() {
 
     fun insertarMensaje(mensaje: Mensaje) = viewModelScope.launch {
         repository.insertarMensaje(mensaje)
-    }
-
-    fun saveProducto(producto: Producto): MutableLiveData<Producto> {
-        val productoResponse = MutableLiveData<Producto>()
-        viewModelScope.launch {
-            productoResponse.value = repository.saveProducto(producto)
-        }
-        return productoResponse
     }
 
     fun getProductos(): MutableLiveData<List<Producto>> {

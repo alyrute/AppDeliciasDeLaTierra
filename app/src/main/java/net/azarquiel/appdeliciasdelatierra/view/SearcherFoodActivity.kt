@@ -18,6 +18,7 @@ import net.azarquiel.appdeliciasdelatierra.model.Categoria
 import net.azarquiel.appdeliciasdelatierra.model.Producto
 import net.azarquiel.appdeliciasdelatierra.model.Usuario
 import net.azarquiel.appdeliciasdelatierra.viewmodel.MainViewModel
+import java.io.Serializable
 
 class SearcherFoodActivity : AppCompatActivity() {
     private lateinit var producto: List<Producto>
@@ -25,8 +26,6 @@ class SearcherFoodActivity : AppCompatActivity() {
     private lateinit var adapter: AdapterProducto
     private lateinit var viewModel: MainViewModel
     private lateinit var categoria: Categoria
-
-
 
     private var usuario: Usuario?=null
 
@@ -39,7 +38,6 @@ class SearcherFoodActivity : AppCompatActivity() {
 
         initRV()
         getProductos()
-        /*loadUserDetails()
 
         val searchField = findViewById<EditText>(R.id.search_field)
         searchField.addTextChangedListener(object : TextWatcher {
@@ -54,7 +52,7 @@ class SearcherFoodActivity : AppCompatActivity() {
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
 
             }
-        })*/
+        })
     }
 
     private fun getProductos() {
@@ -75,7 +73,7 @@ class SearcherFoodActivity : AppCompatActivity() {
         binding.search.rvproducto.adapter = adapter
         binding.search.rvproducto.layoutManager = LinearLayoutManager(this)
     }
-/*
+
     fun onQueryTextChange(query: String): Boolean {
         val original = ArrayList<Producto>(producto)
         adapter.setProducto(original.filter { producto -> producto.nombre.contains(query,true) })
@@ -88,17 +86,5 @@ class SearcherFoodActivity : AppCompatActivity() {
         intent.putExtra("producto", productoPulsado)
         startActivity(intent)
     }
-    private fun loadUserDetails() {
-        val sharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE)
-        val nombre = sharedPreferences.getString("nombre", null)
-        val apellidos = sharedPreferences.getString("apellidos", null)
-        val poblacion = sharedPreferences.getString("poblacion", null)
-        val email = sharedPreferences.getString("email", null)
-        val password = sharedPreferences.getString("password", null)
-        val provincia = sharedPreferences.getString("provincia", null)
 
-        if (nombre != null && apellidos != null && poblacion != null && email != null && password != null && provincia != null) {
-            usuario = Usuario(idusuario = null, nombre = nombre, apellidos = apellidos, email = email, password = password, poblacion = poblacion, provincia = provincia)
-        }
-    }*/
 }

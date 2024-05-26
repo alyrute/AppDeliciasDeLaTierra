@@ -16,22 +16,20 @@ interface DeliciasService {
      @GET("categoria/{idcategoria}/producto")
     fun getProductosPorCategoria(@Path("idcategoria") idcategoria: Int): Deferred<Response<Respuesta>>
 
+    @GET("productos")
+    fun getProductos(): Deferred<Response<List<Producto>>>
+
+    @POST("producto")
+    fun saveProducto(@Body producto: Producto): Deferred<Response<Producto>>
+
+    @GET("producto/{idproducto}/usuario")
+    fun getUsuarioByProducto(@Path("idproducto") idproducto: Int): Deferred<Response<Usuario>>
 
     @GET("intercambios")
     fun getIntercambios(): Deferred<Response<List<Intercambio>>>
 
     @POST("intercambio")
     fun insertarIntercambio(@Body intercambio: Intercambio): Deferred<Response<Intercambio>>
-
-    @POST("mensaje")
-    fun insertarMensaje(@Body mensaje: Mensaje): Deferred<Response<Mensaje>>
-
-    @GET("productos")
-    fun getProductos(): Deferred<Response<List<Producto>>>
-
-
-    @POST("producto")
-    fun saveProducto(@Body producto: Producto): Deferred<Response<Producto>>
 
     @GET("login")
     fun getLogin(
@@ -50,5 +48,8 @@ interface DeliciasService {
     @GET("mensajes/{idUsuario}")
     fun recibirMensajes(@Path("idUsuario") idUsuario: Int): Deferred<Response<List<Mensaje>>>
 
+    @POST("mensaje")
+    fun insertarMensaje(@Body mensaje: Mensaje): Deferred<Response<Mensaje>>
 
-    }
+
+}

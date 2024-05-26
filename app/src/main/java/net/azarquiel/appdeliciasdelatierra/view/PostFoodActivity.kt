@@ -99,7 +99,7 @@ class PostFoodActivity : AppCompatActivity() {
             val imagenBase64 = Base64.encodeToString(imagen, Base64.DEFAULT) // Convertir a Base64
             Log.d("IMAGEN", "ByteArray length: ${imagen.size}")
 
-            val producto = Producto(nombre, descripcion, fechaFormateada, estado, idCategoria, imagenBase64, idusuario) // Usar imagenBase64
+            val producto = Producto(null, nombre, descripcion, fechaFormateada, estado, idCategoria, imagenBase64, idusuario)
 
             viewModel.saveProducto(producto).observe(this, Observer { productoGuardado ->
                 if (productoGuardado != null) {

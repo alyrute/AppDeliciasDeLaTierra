@@ -5,9 +5,8 @@ import net.azarquiel.appdeliciasdelatierra.model.Categoria
 import net.azarquiel.appdeliciasdelatierra.model.Intercambio
 import net.azarquiel.appdeliciasdelatierra.model.Mensaje
 import net.azarquiel.appdeliciasdelatierra.model.Producto
+import net.azarquiel.appdeliciasdelatierra.model.Respuesta
 import net.azarquiel.appdeliciasdelatierra.model.Usuario
-
-
 
 class MainRepository() {
     val service = WebAccess.deliciasService
@@ -20,17 +19,47 @@ class MainRepository() {
         return emptyList()
     }
 
-
     suspend fun getProductosPorCategoria(idcategoria:Int): List<Producto> {
         val webResponse = service.getProductosPorCategoria(idcategoria).await()
         if (webResponse.isSuccessful) {
             return webResponse.body()!!.producto
-        } else {
-            Log.d("API_ERROR", "Response Code: ${webResponse.code()}")
-            Log.d("API_ERROR", "Error Body: ${webResponse.errorBody()?.string()}")
         }
         return emptyList()
     }
+
+    suspend fun getProductos(): List<Producto>? {
+        val webResponse = service.getProductos().await()
+        return if (webResponse.isSuccessful) {
+            webResponse.body()
+        } else {
+            null
+        }
+    }
+    suspend fun saveProducto(producto: Producto): Producto? {
+        val webResponse = service.saveProducto(producto).await()
+        if (webResponse.isSuccessful) {
+            val productoResponse = webResponse.body()
+            return productoResponse
+        }
+        return null
+    }
+
+    suspend fun getUsuarioByProducto(idproducto:Int): Usuario? {
+        println("Obteniendo usuario para el producto: $idproducto")
+        val webResponse = service.getUsuarioByProducto(idproducto).await()
+        println("Respuesta recibida: $webResponse")
+        if (webResponse.isSuccessful) {
+            println("La respuesta fue exitosa. Procesando...")
+            val usuario = webResponse.body()
+            println("Usuario obtenido: $usuario")
+            println("Cuerpo completo de la respuesta: ${webResponse.body()}")
+            return usuario
+        }
+        println("La respuesta no fue exitosa. Devolviendo null.")
+        return null
+    }
+
+
 
 
     suspend fun getIntercambios(): List<Intercambio> {
@@ -53,24 +82,6 @@ class MainRepository() {
         val webResponse = service.insertarMensaje(mensaje).await()
         if (webResponse.isSuccessful) {
             return webResponse.body()
-        }
-        return null
-    }
-
-    suspend fun getProductos(): List<Producto>? {
-        val webResponse = service.getProductos().await()
-        return if (webResponse.isSuccessful) {
-            webResponse.body()
-        } else {
-            null
-        }
-    }
-
-    suspend fun saveProducto(producto: Producto): Producto? {
-        val webResponse = service.saveProducto(producto).await()
-        if (webResponse.isSuccessful) {
-            val productoResponse = webResponse.body()
-            return productoResponse
         }
         return null
     }

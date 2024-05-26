@@ -10,11 +10,8 @@ import net.azarquiel.appdeliciasdelatierra.databinding.ActivityLoginBinding
 import net.azarquiel.appdeliciasdelatierra.model.Usuario
 import net.azarquiel.appdeliciasdelatierra.view.MainActivity
 import net.azarquiel.appdeliciasdelatierra.view.RegisterActivity
-import net.azarquiel.appdeliciasdelatierra.view.SearcherFoodActivity
 import net.azarquiel.appdeliciasdelatierra.viewmodel.MainViewModel
 import android.content.SharedPreferences
-
-
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding

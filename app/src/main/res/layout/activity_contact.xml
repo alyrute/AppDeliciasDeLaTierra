@@ -1,33 +1,110 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
-    tools:context=".view.ContactActivity">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="16dp">
 
-    <com.google.android.material.appbar.AppBarLayout
+    <!-- CardView para la cabecera del destinatario -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fitsSystemWindows="true">
+        android:layout_margin="8dp"
+        app:cardCornerRadius="15dp">
 
-        <com.google.android.material.appbar.MaterialToolbar
-            android:id="@+id/toolbar"
+        <LinearLayout
+            android:id="@+id/cabecera_destinatario"
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize" />
+            android:layout_height="83dp"
+            android:background="@color/orange"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="8dp">
 
-    </com.google.android.material.appbar.AppBarLayout>
+            <!-- Icono del destinatario -->
+            <ImageView
+                android:id="@+id/icono_destinatario"
+                android:layout_width="74dp"
+                android:layout_height="67dp"
+                android:src="@drawable/iconopersonas" />
 
-    <include layout="@layout/content_contact" />
+            <!-- Contenedor para el nombre y la ubicación -->
+            <LinearLayout
+                android:layout_width="249dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:orientation="vertical">
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
+                <!-- Nombre del destinatario -->
+
+                <!-- Población y provincia -->
+
+                <TextView
+                    android:id="@+id/contacNombe"
+                    android:layout_width="248dp"
+                    android:layout_height="34dp"
+                    android:text="Nombre"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/contacPobPro"
+                    android:layout_width="247dp"
+                    android:layout_height="34dp"
+                    android:text="Población, Provincia"
+                    android:textSize="16sp" />
+            </LinearLayout>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <!-- RecyclerView para los mensajes -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view_mensajes"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_above="@+id/area_envio_mensaje"
+        android:layout_alignStart="@+id/cardView2"
+        android:layout_alignTop="@+id/cardView"
+        android:layout_alignEnd="@+id/cardView2"
+        android:layout_marginStart="-8dp"
+        android:layout_marginTop="-590dp"
+        android:layout_marginEnd="-8dp" />
+
+    <!-- CardView para el área de envío de mensajes -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_marginEnd="@dimen/fab_margin"
-        android:layout_marginBottom="16dp"
-        app:srcCompat="@android:drawable/ic_dialog_email" />
+        android:layout_alignParentBottom="true"
+        android:layout_margin="8dp"
+        app:cardCornerRadius="25dp">
 
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:orientation="horizontal"
+            android:padding="16dp">
+
+            <EditText
+                android:id="@+id/campo_mensaje"
+                android:layout_width="0dp"
+                android:layout_height="69dp"
+                android:layout_weight="1"
+                android:hint="Escribe tu mensaje aquí..." />
+
+            <ImageButton
+                android:id="@+id/bntenviar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="?android:attr/selectableItemBackground"
+                android:padding="10dp"
+                android:clickable="true"
+                android:scaleType="centerInside"
+                android:src="@drawable/iconobtnenviar" />
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+</RelativeLayout>
+
