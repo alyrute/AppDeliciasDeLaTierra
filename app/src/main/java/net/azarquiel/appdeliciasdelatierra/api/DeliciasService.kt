@@ -42,11 +42,14 @@ interface DeliciasService {
     @POST("register")
     fun register(@Body usuario: Usuario): Deferred<Response<Usuario>>
 
-    @POST("mensaje")
-    fun enviarMensaje(@Body mensaje: Mensaje): Deferred<Response<Mensaje>>
+    @GET("mensaje")
+    fun getMensajes(): Deferred<Response<List<Mensaje>>>
 
-    @GET("mensajes/{idUsuario}")
-    fun recibirMensajes(@Path("idUsuario") idUsuario: Int): Deferred<Response<List<Mensaje>>>
+    @GET("mensajes/sender/{senderid}")
+    fun getMensajesBySenderId(@Path("senderid") senderid: Int): Deferred<Response<List<Mensaje>>>
+
+    @GET("mensajes/receiver/{receiverid}")
+    fun getMensajesByReceiverId(@Path("receiverid") receiverid: Int): Deferred<Response<List<Mensaje>>>
 
     @POST("mensaje")
     fun insertarMensaje(@Body mensaje: Mensaje): Deferred<Response<Mensaje>>

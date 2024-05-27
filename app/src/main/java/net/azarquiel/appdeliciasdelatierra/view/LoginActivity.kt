@@ -13,6 +13,7 @@ import net.azarquiel.appdeliciasdelatierra.view.RegisterActivity
 import net.azarquiel.appdeliciasdelatierra.viewmodel.MainViewModel
 import android.content.SharedPreferences
 import android.util.Log
+import com.google.gson.Gson
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
@@ -30,6 +31,7 @@ class LoginActivity : AppCompatActivity() {
 
         checkLogin()
         setupViews()
+        obtenerUsuario()
 
 
     }
@@ -78,6 +80,29 @@ class LoginActivity : AppCompatActivity() {
         val editor = sharedPreferences.edit()
         editor.putString("username", nombre)
         editor.putInt("idusuario", idusuario)
+        editor.apply()
+        Log.d("LoginActivity", "Detalles guardados - Nombre: $nombre, IDUsuario: $idusuario")
+    }
+
+    private fun obtenerUsuario(): Usuario? {
+        val sharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE)
+        val usuarioJson = sharedPreferences.getString("usuario", null)
+
+        return if (usuarioJson != null) {
+            val gson = Gson()
+            gson.fromJson(usuarioJson, Usuario::class.java)
+        } else {
+            null
+        }
+    }
+
+    private fun guardarUsuario(usuario: Usuario) {
+        val gson = Gson()
+        val usuarioJson = gson.toJson(usuario)
+
+        val sharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+        editor.putString("usuario", usuarioJson)
         editor.apply()
     }
 

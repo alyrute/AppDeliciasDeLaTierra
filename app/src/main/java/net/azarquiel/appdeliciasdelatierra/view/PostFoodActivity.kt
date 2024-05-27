@@ -23,6 +23,7 @@ import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 import android.util.Base64
+import net.azarquiel.appdeliciasdelatierra.model.Usuario
 
 class PostFoodActivity : AppCompatActivity() {
 
@@ -89,7 +90,7 @@ class PostFoodActivity : AppCompatActivity() {
         val fecha = Date()
         val estado = "Disponible"
         val idusuario = obtenerIdUsuario()
-        val idCategoria = (binding.spinnerCategories.selectedItem as Categoria).idcategoria
+        val categoriaSeleccionada = binding.spinnerCategories.selectedItem as Categoria
 
         val formatoFecha = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS", Locale.US)
         val fechaFormateada = formatoFecha.format(fecha)
@@ -99,8 +100,14 @@ class PostFoodActivity : AppCompatActivity() {
             val imagenBase64 = Base64.encodeToString(imagen, Base64.DEFAULT) // Convertir a Base64
             Log.d("IMAGEN", "ByteArray length: ${imagen.size}")
 
-            val producto = Producto(null, nombre, descripcion, fechaFormateada, estado, idCategoria, imagenBase64, idusuario)
 
+            val categoria = Categoria(categoriaSeleccionada.idcategoria, categoriaSeleccionada.nombre, categoriaSeleccionada.imagen)
+
+
+            // Crear el producto con los objetos
+            val producto = Producto(null, nombre, descripcion, fechaFormateada, estado, categoria, imagenBase64, idusuario)
+
+            // Guardar el producto utilizando el ViewModel
             viewModel.saveProducto(producto).observe(this, Observer { productoGuardado ->
                 if (productoGuardado != null) {
                     this.showToast("Producto guardado con éxito")
@@ -113,6 +120,7 @@ class PostFoodActivity : AppCompatActivity() {
             this.showToast("Por favor, selecciona una imagen para el producto")
         }
     }
+
 
     private fun uriToByteArray(uri: Uri): ByteArray {
         val inputStream = contentResolver.openInputStream(uri)

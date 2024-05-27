@@ -29,6 +29,7 @@ class CategoriasActivity : AppCompatActivity() {
     private lateinit var binding: ActivityCategoriasBinding
     private lateinit var adapter: AdapterCategorias
     private lateinit var viewModel: MainViewModel
+    private lateinit var usuario: Usuario
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,6 +37,7 @@ class CategoriasActivity : AppCompatActivity() {
 
         binding = ActivityCategoriasBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
 
 
         viewModel = ViewModelProvider(this).get(MainViewModel::class.java)

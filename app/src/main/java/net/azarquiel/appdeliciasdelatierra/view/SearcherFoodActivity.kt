@@ -26,8 +26,7 @@ class SearcherFoodActivity : AppCompatActivity() {
     private lateinit var adapter: AdapterProducto
     private lateinit var viewModel: MainViewModel
     private lateinit var categoria: Categoria
-
-
+    private lateinit var usuario: Usuario
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

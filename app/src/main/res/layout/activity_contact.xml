@@ -88,7 +88,7 @@
             android:padding="16dp">
 
             <EditText
-                android:id="@+id/campo_mensaje"
+                android:id="@+id/tvMensaje"
                 android:layout_width="0dp"
                 android:layout_height="69dp"
                 android:layout_weight="1"
@@ -106,5 +106,8 @@
                 android:src="@drawable/iconobtnenviar" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>
+    <include
+        android:id="@+id/contact"
+        layout="@layout/content_contact"/>
 </RelativeLayout>
 

@@ -1,10 +1,8 @@
 package net.azarquiel.appdeliciasdelatierra.viewmodel
-import androidx.lifecycle.LiveData
+
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import net.azarquiel.appdeliciasdelatierra.api.MainRepository
@@ -14,17 +12,21 @@ import net.azarquiel.appdeliciasdelatierra.model.Mensaje
 import net.azarquiel.appdeliciasdelatierra.model.Producto
 import net.azarquiel.appdeliciasdelatierra.model.Respuesta
 import net.azarquiel.appdeliciasdelatierra.model.Usuario
+import androidx.lifecycle.LiveData
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Dispatchers.Main
 
 
 class MainViewModel : ViewModel() {
 
     val usuario: MutableLiveData<Usuario?> = MutableLiveData()
+    val mensajeLiveData = MutableLiveData<Mensaje?>()
 
     private val repository = MainRepository()
 
     fun getCategoria(): MutableLiveData<List<Categoria>> {
         val categorias = MutableLiveData<List<Categoria>>()
-        GlobalScope.launch(Dispatchers.Main) {
+        GlobalScope.launch(Main) {
             categorias.value = repository.getCategorias()
         }
         return categorias
@@ -58,13 +60,11 @@ class MainViewModel : ViewModel() {
         repository.insertarIntercambio(intercambio)
     }
 
-    fun insertarMensaje(mensaje: Mensaje) = viewModelScope.launch {
-        repository.insertarMensaje(mensaje)
-    }
+
 
     fun getProductos(idusuario:Int): MutableLiveData<Producto?> {
         val productos = MutableLiveData<Producto?>()
-        GlobalScope.launch(Dispatchers.Main) {
+        GlobalScope.launch(Main) {
             productos.value = repository.getProductos(idusuario)
         }
         return productos
@@ -85,12 +85,28 @@ class MainViewModel : ViewModel() {
         return usuarioResponse
     }
 
-
-
-    fun enviarMensaje(mensaje: Mensaje) = viewModelScope.launch {
-        repository.enviarMensaje(mensaje)
+    fun getMensajes(): LiveData<List<Mensaje>> {
+        val mensajes = MutableLiveData<List<Mensaje>>()
+        viewModelScope.launch(Dispatchers.IO) {
+            val data = repository.getMensajes()
+            mensajes.postValue(data)
+        }
+        return mensajes
     }
 
-    fun recibirMensajes(idUsuario: Int) = viewModelScope.launch { repository.recibirMensajes(idUsuario) }
+    fun getMensajesByUsuario(idUsuario: Int): MutableLiveData<List<Mensaje>> {
+        val mensajes = MutableLiveData<List<Mensaje>>()
+        GlobalScope.launch(Dispatchers.Main) {
+            mensajes.value = repository.getMensajesByUsuario(idUsuario)
+        }
+        return mensajes
+    }
+
+    fun insertarMensaje(mensaje: Mensaje) = viewModelScope.launch {
+        val mensajeEnviado = repository.insertarMensaje(mensaje)
+        mensajeLiveData.postValue(mensajeEnviado)
+    }
+
+
 
 }

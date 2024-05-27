@@ -1,8 +1,6 @@
 package net.azarquiel.appdeliciasdelatierra.model
 
-import android.util.Base64
 import java.io.Serializable
-import java.util.Date
 
 data class Usuario (
     var idusuario: Int? =null,
@@ -21,7 +19,7 @@ data class Producto(
     var descripcion: String,
     var fecha: String,
     var estado: String,
-    var idcategoria: Int,
+    var categoria: Categoria,
     var imagen: String,
     var idusuario: Int,
     ): Serializable
@@ -44,13 +42,12 @@ data class Intercambio (
 
 ): Serializable
 
-data class Mensaje (
-    var idintercambio: Int,
-    var idusuario1: Int,
-    var idusuario2: Int,
-    var texto: String,
-    var fecha: Date,
-    var leido: Boolean
+data class Mensaje(
+    val senderid: Usuario,
+    val receiverid: Usuario,
+    val texto: String,
+    val fecha: String,
+    val leido: Boolean
 
     ): Serializable
 

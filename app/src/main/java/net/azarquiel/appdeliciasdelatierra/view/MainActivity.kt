@@ -25,6 +25,8 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+
+
         val toolbar: Toolbar = binding.myToolbar
         setSupportActionBar(toolbar)
 

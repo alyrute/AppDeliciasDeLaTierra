@@ -72,14 +72,6 @@ class MainRepository() {
         return null
     }
 
-    suspend fun insertarMensaje(mensaje: Mensaje): Mensaje? {
-        val webResponse = service.insertarMensaje(mensaje).await()
-        if (webResponse.isSuccessful) {
-            return webResponse.body()
-        }
-        return null
-    }
-
     suspend fun getLogin(email: String, password: String): Usuario? {
         val webResponse = service.getLogin(email, password).await()
         if (webResponse.isSuccessful) {
@@ -105,24 +97,39 @@ class MainRepository() {
     }
 
 
-    suspend fun enviarMensaje(mensaje: Mensaje): Mensaje? {
-        val webResponse = service.enviarMensaje(mensaje).await()
-        if (webResponse.isSuccessful) {
-            return webResponse.body()
-        }
-        return null
-    }
-
-    suspend fun recibirMensajes(idUsuario: Int): List<Mensaje> {
-        val webResponse = service.recibirMensajes(idUsuario).await()
+    suspend fun getMensajes(): List<Mensaje> {
+        val webResponse = service.getMensajes().await()
         if (webResponse.isSuccessful) {
             return webResponse.body()!!
         }
         return emptyList()
     }
 
+    suspend fun getMensajesByUsuario(idusuario: Int): List<Mensaje> {
+        val mensajesEnviadosResponse = service.getMensajesBySenderId(idusuario).await()
+        val mensajesRecibidosResponse = service.getMensajesByReceiverId(idusuario).await()
+
+        val mensajes = mutableListOf<Mensaje>()
+        if (mensajesEnviadosResponse.isSuccessful && mensajesEnviadosResponse.body() != null) {
+            mensajes.addAll(mensajesEnviadosResponse.body()!!)
+        }
+        if (mensajesRecibidosResponse.isSuccessful && mensajesRecibidosResponse.body() != null) {
+            mensajes.addAll(mensajesRecibidosResponse.body()!!)
+        }
+        return mensajes
+    }
+
+    suspend fun insertarMensaje(mensaje: Mensaje): Mensaje? {
+        val webResponse = service.insertarMensaje(mensaje).await()
+        if (webResponse.isSuccessful) {
+            return webResponse.body()
+        }
+        return null
+    }
+
 
 
 
 }
+
 

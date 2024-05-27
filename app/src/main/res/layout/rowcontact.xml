@@ -11,7 +11,7 @@
 
         <!-- Contenedor del mensaje -->
         <TextView
-            android:id="@+id/tvMensaje"
+            android:id="@+id/textmensaje"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
