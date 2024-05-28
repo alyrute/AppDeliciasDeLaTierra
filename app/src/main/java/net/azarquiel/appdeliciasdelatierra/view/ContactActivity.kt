@@ -36,26 +36,30 @@ class ContactActivity : AppCompatActivity() {
         viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
         producto = intent.getSerializableExtra("producto") as Producto
 
-
-
         val usuario = obtenerUsuario()
         Log.d("UsuarioContac", "$usuario")
 
-       // initRV()
+        initRV()
         setupObservers()
 
-        val idproducto: Int = producto.idproducto?:-1
+        val idproducto: Int = producto.idproducto ?: -1
         val senderid: Int = usuario?.idusuario ?: -1
-       // val receiverid: Int = producto.idusuario ?: -1
+        val receiverid: Int = producto.usuario.idusuario ?: -1
 
-        // Obtener mensajes
-      /*  viewModel.getMensajesByIdProducto(idproducto, senderid, receiverid).observe(this, Observer { mensajes ->
-            adapter.setMensajes(mensajes)
-            adapter.notifyDataSetChanged()
+        viewModel.getMensajesByIdProducto(idproducto, senderid, receiverid).observe(this, Observer { mensajes ->
+            if (mensajes != null) {
+                adapter.setMensajes(mensajes)
+                Log.d("eo", "Mensajes recibidos: $mensajes")
+                Log.d("eo", "Cantidad de mensajes: ${mensajes.size}")
+            } else {
+                Log.e("ContactActivity", "No se encontraron mensajes.")
+            }
         })
 
+
+
         // Obtener detalles del usuario por su ID y registrar la información en los logs
-        viewModel.getUsuarioById(producto.idusuario ?: -1).observe(this, Observer { usuario ->
+        viewModel.getUsuarioById(producto.usuario.idusuario ?: -1).observe(this, Observer { usuario ->
             if (usuario != null) {
                 binding.contacNombe.text = usuario.nombre
                 binding.contacPobPro.text = "${usuario.poblacion}, ${usuario.provincia}"
@@ -66,16 +70,16 @@ class ContactActivity : AppCompatActivity() {
         })
 
         binding.bntenviar.setOnClickListener {
-            //enviarMensaje()
+            enviarMensaje()
         }
-    }*/
-/*
+    }
+
     private fun initRV() {
         adapter = AdapterMensaje(this, R.layout.rowcontact)
         binding.contact.rvmensaje.layoutManager = LinearLayoutManager(this)
-        binding.contact.rvmensaje.adapter = adapter*/
+        binding.contact.rvmensaje.adapter = adapter
     }
-/*
+
     private fun enviarMensaje() {
         val textoMensaje = binding.tvMensaje.text.toString()
         if (textoMensaje.isNotEmpty()) {
@@ -85,8 +89,8 @@ class ContactActivity : AppCompatActivity() {
 
             val mensaje = producto.idproducto?.let {
                 Mensaje(
-                    receiverid = producto.idproducto,
-                    senderid = usuario?.idusuario?:-1,
+                    receiverid = producto.usuario.idusuario ?: -1,
+                    senderid = usuario?.idusuario ?: -1,
                     texto = textoMensaje,
                     fecha = fechaFormateada,
                     leido = false,
@@ -99,7 +103,7 @@ class ContactActivity : AppCompatActivity() {
                 }
             }
         }
-    }*/
+    }
 
     private fun enviarMensajeAlReceptor(mensaje: Mensaje) {
         lifecycleScope.launch {

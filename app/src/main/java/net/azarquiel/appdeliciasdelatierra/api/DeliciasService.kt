@@ -44,7 +44,7 @@ interface DeliciasService {
     @POST("register")
     fun register(@Body usuario: Usuario): Deferred<Response<Usuario>>
 
-    @GET("mensajes/producto/{idproducto}")
+    @GET("mensajes/producto/{idproducto}/")
     fun obtenerMensajesPorProducto(
         @Path("idproducto") idProducto: Int, @Query("senderid") senderId: Int, @Query("receiverid") receiverId: Int): Deferred<Response<List<Mensaje>>>
 

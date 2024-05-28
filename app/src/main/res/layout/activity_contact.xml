@@ -63,7 +63,6 @@
         android:id="@+id/recycler_view_mensajes"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_above="@+id/area_envio_mensaje"
         android:layout_alignStart="@+id/cardView2"
         android:layout_alignTop="@+id/cardView"
         android:layout_alignEnd="@+id/cardView2"
@@ -92,6 +91,7 @@
                 android:layout_width="0dp"
                 android:layout_height="69dp"
                 android:layout_weight="1"
+                android:inputType="text"
                 android:hint="Escribe tu mensaje aquí..." />
 
             <ImageButton

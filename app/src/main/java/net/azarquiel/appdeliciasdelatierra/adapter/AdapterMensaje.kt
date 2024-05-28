@@ -17,12 +17,12 @@ class AdapterMensaje(
     val layout: Int
 ) : RecyclerView.Adapter<AdapterMensaje.ViewHolder>() {
 
-    private var dataList: List<Mensaje> = emptyList()
+    private var dataList: MutableList<Mensaje> = mutableListOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
-        val viewlayout = layoutInflater.inflate(layout, parent, false)
-        return ViewHolder(viewlayout, context)
+        val viewLayout = layoutInflater.inflate(layout, parent, false)
+        return ViewHolder(viewLayout)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
@@ -35,24 +35,25 @@ class AdapterMensaje(
     }
 
     internal fun setMensajes(mensajes: List<Mensaje>) {
-        this.dataList = mensajes
+        this.dataList = mensajes.toMutableList()
         notifyDataSetChanged()
     }
 
     internal fun addMensaje(mensaje: Mensaje) {
-        dataList = dataList + mensaje
+        dataList.add(mensaje)
         notifyItemInserted(dataList.size - 1)
     }
 
     internal fun clearMensajes() {
-        dataList = emptyList()
+        dataList.clear()
         notifyDataSetChanged()
     }
 
-    class ViewHolder(viewlayout: View, val context: Context) : RecyclerView.ViewHolder(viewlayout) {
+    class ViewHolder(viewLayout: View) : RecyclerView.ViewHolder(viewLayout) {
+        private val textMensaje: TextView = itemView.findViewById(R.id.textmensaje)
+
         fun bind(dataItem: Mensaje) {
-            val textmensaje = itemView.findViewById<TextView>(R.id.textmensaje)
-            textmensaje.text = dataItem.texto
+            textMensaje.text = dataItem.texto
         }
     }
 }
