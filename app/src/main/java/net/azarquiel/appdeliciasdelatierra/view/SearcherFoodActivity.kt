@@ -47,7 +47,7 @@ class SearcherFoodActivity : AppCompatActivity() {
         val idusuario = sharedPreferences.getInt("idusuario", -1)
 
         if (idusuario != -1) {
-            getProductos(idusuario)
+        //    getProductos(idusuario)
         }
     }
 
@@ -64,7 +64,7 @@ class SearcherFoodActivity : AppCompatActivity() {
             }
         })
     }
-
+/*
     private fun getProductos(idusuario: Int) {
         viewModel.getProductosPorCategoria(categoria.idcategoria).observe(this, Observer { productos ->
             productos?.let {
@@ -75,7 +75,7 @@ class SearcherFoodActivity : AppCompatActivity() {
             }
         })
     }
-
+*/
     private fun initRV() {
         adapter = AdapterProducto(this, R.layout.rowproducto)
         binding.search.rvproducto.adapter = adapter
@@ -92,6 +92,7 @@ class SearcherFoodActivity : AppCompatActivity() {
         val productoPulsado = v.tag as Producto
         val intent = Intent(this, ContactActivity::class.java)
         intent.putExtra("producto", productoPulsado)
+
         startActivity(intent)
     }
 

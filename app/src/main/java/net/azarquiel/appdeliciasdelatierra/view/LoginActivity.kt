@@ -18,9 +18,7 @@ import com.google.gson.Gson
 class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
     private lateinit var viewModel: MainViewModel
-    private var usuario: Usuario?=null
-    private lateinit var sh: SharedPreferences
-
+    private lateinit var sharedPreferences: SharedPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,22 +26,9 @@ class LoginActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
+        sharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE)
 
-        checkLogin()
         setupViews()
-        obtenerUsuario()
-
-
-    }
-
-    private fun checkLogin() {
-        val sharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE)
-        val username = sharedPreferences.getString("username", null)
-        val idusuario = sharedPreferences.getInt("idusuario", -1)
-
-        if (username != null && idusuario != -1) {
-            navigateToMain()
-        }
     }
 
     private fun setupViews() {
@@ -67,58 +52,35 @@ class LoginActivity : AppCompatActivity() {
         viewModel.getLogin(email, password)
         viewModel.usuario.observe(this, Observer { usuario ->
             if (usuario != null) {
-                usuario.idusuario?.let { saveUserDetails(usuario.nombre, it) }
-                navigateToMain()
+                saveUserName(usuario.nombre)
+                saveUsuario(usuario)
+                navigateToMain(usuario.nombre)
             } else {
                 showToast("Credenciales incorrectas")
             }
         })
     }
 
-    private fun saveUserDetails(nombre: String, idusuario: Int) {
-        val sharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE)
+    private fun saveUserName(username: String) {
         val editor = sharedPreferences.edit()
-        editor.putString("username", nombre)
-        editor.putInt("idusuario", idusuario)
+        editor.putString("username", username)
         editor.apply()
-        Log.d("LoginActivity", "Detalles guardados - Nombre: $nombre, IDUsuario: $idusuario")
     }
 
-    private fun obtenerUsuario(): Usuario? {
-        val sharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE)
-        val usuarioJson = sharedPreferences.getString("usuario", null)
-
-        return if (usuarioJson != null) {
-            val gson = Gson()
-            gson.fromJson(usuarioJson, Usuario::class.java)
-        } else {
-            null
-        }
-    }
-
-    private fun guardarUsuario(usuario: Usuario) {
+    private fun saveUsuario(usuario: Usuario) {
         val gson = Gson()
         val usuarioJson = gson.toJson(usuario)
-
-        val sharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE)
         val editor = sharedPreferences.edit()
         editor.putString("usuario", usuarioJson)
         editor.apply()
     }
 
 
-    private fun checkIfLoggedIn() {
-        val sharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE)
-        val username = sharedPreferences.getString("username", null)
-        val idusuario = sharedPreferences.getInt("idusuario", -1)
 
-        if (username != null && idusuario != -1) {
-            navigateToMain()
-        }
-    }
 
-    private fun navigateToMain() {
+    private fun navigateToMain(username: String) {
         val intent = Intent(this, MainActivity::class.java)
+        intent.putExtra("username", username)
         startActivity(intent)
         finish()
     }
@@ -128,13 +90,9 @@ class LoginActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
-
     private fun showToast(message: String) {
         runOnUiThread {
             Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
         }
     }
-
-
-
 }

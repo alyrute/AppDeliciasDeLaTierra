@@ -23,6 +23,7 @@ import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 import android.util.Base64
+import com.google.gson.Gson
 import net.azarquiel.appdeliciasdelatierra.model.Usuario
 
 class PostFoodActivity : AppCompatActivity() {
@@ -79,47 +80,61 @@ class PostFoodActivity : AppCompatActivity() {
         })
     }
 
-    private fun obtenerIdUsuario(): Int {
+    private fun obtenerUsuario(): Usuario? {
         val sharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE)
-        return sharedPreferences.getInt("idusuario", -1)
-    }
-
-    private fun saveProducto() {
-        val nombre = binding.tvproducto.text.toString()
-        val descripcion = binding.tvdescipcion.text.toString()
-        val fecha = Date()
-        val estado = "Disponible"
-        val idusuario = obtenerIdUsuario()
-        val categoriaSeleccionada = binding.spinnerCategories.selectedItem as Categoria
-
-        val formatoFecha = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS", Locale.US)
-        val fechaFormateada = formatoFecha.format(fecha)
-
-        if (imageUri != null) {
-            val imagen = uriToByteArray(imageUri!!)
-            val imagenBase64 = Base64.encodeToString(imagen, Base64.DEFAULT) // Convertir a Base64
-            Log.d("IMAGEN", "ByteArray length: ${imagen.size}")
-
-
-            val categoria = Categoria(categoriaSeleccionada.idcategoria, categoriaSeleccionada.nombre, categoriaSeleccionada.imagen)
-
-
-            // Crear el producto con los objetos
-            val producto = Producto(null, nombre, descripcion, fechaFormateada, estado, categoria, imagenBase64, idusuario)
-
-            // Guardar el producto utilizando el ViewModel
-            viewModel.saveProducto(producto).observe(this, Observer { productoGuardado ->
-                if (productoGuardado != null) {
-                    this.showToast("Producto guardado con éxito")
-                    navigateToMain()
-                } else {
-                    this.showToast("Error al guardar el producto")
-                }
-            })
+        val usuarioJson = sharedPreferences.getString("usuario", null)
+        return if (usuarioJson != null) {
+            val gson = Gson()
+            gson.fromJson(usuarioJson, Usuario::class.java)
         } else {
-            this.showToast("Por favor, selecciona una imagen para el producto")
+            null
         }
     }
+
+
+
+    private fun saveProducto() {
+        val usuario = obtenerUsuario()
+        val idusuario = usuario?.idusuario
+
+        if (idusuario != null) {
+            val nombre = binding.tvproducto.text.toString()
+            val descripcion = binding.tvdescipcion.text.toString()
+            val fecha = Date()
+            val estado = "Disponible"
+            val categoriaSeleccionada = binding.spinnerCategories.selectedItem as Categoria
+
+            val formatoFecha = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS", Locale.US)
+            val fechaFormateada = formatoFecha.format(fecha)
+
+            if (imageUri != null) {
+                val imagen = uriToByteArray(imageUri!!)
+                val imagenBase64 = Base64.encodeToString(imagen, Base64.DEFAULT) // Convertir a Base64
+
+                val categoria = Categoria(categoriaSeleccionada.idcategoria, categoriaSeleccionada.nombre, categoriaSeleccionada.imagen)
+
+                // Crear el producto con los objetos
+                val producto = Producto( null, usuario, nombre, descripcion, fechaFormateada, estado, categoria, imagenBase64)
+                Log.d("holaaa", "$producto")
+
+                // Guardar el producto utilizando el ViewModel
+                viewModel.saveProducto(producto).observe(this, Observer { productoGuardado ->
+                    if (productoGuardado != null) {
+                        this.showToast("Producto guardado con éxito")
+                        navigateToMain()
+                    } else {
+                        this.showToast("Error al guardar el producto")
+                    }
+                })
+            } else {
+                this.showToast("Por favor, selecciona una imagen para el producto")
+            }
+        } else {
+            // Manejar el caso en que idusuario es null
+            this.showToast("Error: No se pudo obtener el ID del usuario")
+        }
+    }
+
 
 
     private fun uriToByteArray(uri: Uri): ByteArray {

@@ -1,12 +1,14 @@
 package net.azarquiel.appdeliciasdelatierra.api
 
 import android.util.Log
+import androidx.lifecycle.LiveData
 import net.azarquiel.appdeliciasdelatierra.model.Categoria
 import net.azarquiel.appdeliciasdelatierra.model.Intercambio
 import net.azarquiel.appdeliciasdelatierra.model.Mensaje
 import net.azarquiel.appdeliciasdelatierra.model.Producto
 import net.azarquiel.appdeliciasdelatierra.model.Respuesta
 import net.azarquiel.appdeliciasdelatierra.model.Usuario
+import java.io.IOException
 
 class MainRepository() {
     val service = WebAccess.deliciasService
@@ -48,13 +50,11 @@ class MainRepository() {
         val webResponse = service.getUsuarioByProducto(idproducto).await()
         if (webResponse.isSuccessful) {
             val usuario = webResponse.body()
+            Log.d("coño" ,"$usuario")
             return usuario
         }
         return null
     }
-
-
-
 
     suspend fun getIntercambios(): List<Intercambio> {
         val webResponse = service.getIntercambios().await()
@@ -80,14 +80,15 @@ class MainRepository() {
         return null
     }
 
-    suspend fun getUsuarios(): List<Usuario>? {
-        val webResponse = service.getUsuarios().await()
-        return if (webResponse.isSuccessful) {
-            webResponse.body()
-        } else {
-            null
+    suspend fun getUsuarioById(idusuario: Int): Usuario? {
+        val webResponse = service.getUsuarioById(idusuario).await()
+        if (webResponse.isSuccessful) {
+            return webResponse.body()
         }
+        return null
     }
+
+
     suspend fun register(usuario: Usuario): Usuario? {
         val webResponse = service.register(usuario).await()
         if (webResponse.isSuccessful) {
@@ -96,35 +97,40 @@ class MainRepository() {
         return null
     }
 
-
-    suspend fun getMensajes(): List<Mensaje> {
+/*
+    suspend fun getMensajes(): List<Mensaje>? {
         val webResponse = service.getMensajes().await()
         if (webResponse.isSuccessful) {
             return webResponse.body()!!
         }
         return emptyList()
-    }
+    }*/
 
-    suspend fun getMensajesByUsuario(idusuario: Int): List<Mensaje> {
-        val mensajesEnviadosResponse = service.getMensajesBySenderId(idusuario).await()
-        val mensajesRecibidosResponse = service.getMensajesByReceiverId(idusuario).await()
+    suspend fun getMensajesByIdProducto(idproducto: Int, senderid: Int, receiverid: Int): List<Mensaje> {
+        val mensajesRecibidosResponse = service.obtenerMensajesPorProducto(idproducto, senderid, receiverid).await()
 
-        val mensajes = mutableListOf<Mensaje>()
-        if (mensajesEnviadosResponse.isSuccessful && mensajesEnviadosResponse.body() != null) {
-            mensajes.addAll(mensajesEnviadosResponse.body()!!)
+        return if (mensajesRecibidosResponse.isSuccessful) {
+            mensajesRecibidosResponse.body() ?: emptyList()
+        } else {
+            emptyList()
         }
-        if (mensajesRecibidosResponse.isSuccessful && mensajesRecibidosResponse.body() != null) {
-            mensajes.addAll(mensajesRecibidosResponse.body()!!)
-        }
-        return mensajes
     }
 
     suspend fun insertarMensaje(mensaje: Mensaje): Mensaje? {
-        val webResponse = service.insertarMensaje(mensaje).await()
-        if (webResponse.isSuccessful) {
-            return webResponse.body()
+        return try {
+            val webResponse = service.insertarMensaje(mensaje).await()
+            Log.d("coño" , "$mensaje")
+            if (webResponse.isSuccessful) {
+                webResponse.body()
+
+            } else {
+
+                null
+            }
+        } catch (e: IOException) {
+            // Manejar la excepción de red
+            null
         }
-        return null
     }
 
 

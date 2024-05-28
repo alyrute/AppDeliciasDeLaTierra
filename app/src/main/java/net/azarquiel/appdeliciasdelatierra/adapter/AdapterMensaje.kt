@@ -12,12 +12,12 @@ import kotlinx.coroutines.Job
 import net.azarquiel.appdeliciasdelatierra.R
 import net.azarquiel.appdeliciasdelatierra.model.Mensaje
 import net.azarquiel.appdeliciasdelatierra.model.Producto
-class AdapterMensaje(val context: Context,
-                     val layout: Int
+class AdapterMensaje(
+    val context: Context,
+    val layout: Int
 ) : RecyclerView.Adapter<AdapterMensaje.ViewHolder>() {
 
     private var dataList: List<Mensaje> = emptyList()
-    private var mensajes: MutableList<Mensaje> = mutableListOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
@@ -34,33 +34,25 @@ class AdapterMensaje(val context: Context,
         return dataList.size
     }
 
-    internal fun setMensaje (mensaje: List<Mensaje>) {
-        this.dataList = mensaje
+    internal fun setMensajes(mensajes: List<Mensaje>) {
+        this.dataList = mensajes
         notifyDataSetChanged()
     }
 
-    fun addMensaje(mensaje: Mensaje) {
-        mensajes.add(mensaje)
-        notifyItemInserted(mensajes.size - 1)
+    internal fun addMensaje(mensaje: Mensaje) {
+        dataList = dataList + mensaje
+        notifyItemInserted(dataList.size - 1)
     }
 
+    internal fun clearMensajes() {
+        dataList = emptyList()
+        notifyDataSetChanged()
+    }
 
     class ViewHolder(viewlayout: View, val context: Context) : RecyclerView.ViewHolder(viewlayout) {
-        fun bind(dataItem: Mensaje){
-
-
-            val textmensaje = itemView.findViewById(R.id.textmensaje) as TextView
-
-
-
-
+        fun bind(dataItem: Mensaje) {
+            val textmensaje = itemView.findViewById<TextView>(R.id.textmensaje)
             textmensaje.text = dataItem.texto
-
-
-
-
-            itemView.tag = dataItem
         }
-
     }
 }

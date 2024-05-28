@@ -17,7 +17,7 @@ interface DeliciasService {
     fun getProductosPorCategoria(@Path("idcategoria") idcategoria: Int): Deferred<Response<Respuesta>>
 
     @GET("producto")
-    suspend fun getProductos(@Query("idusuario") idusuario: Int): Deferred<Response<Producto>>
+    suspend fun getProductos(@Query("idproducto") idproducto: Int): Deferred<Response<Producto>>
 
     @POST("producto")
     fun saveProducto(@Body producto: Producto): Deferred<Response<Producto>>
@@ -38,18 +38,15 @@ interface DeliciasService {
 
     @GET("usuarios")
     fun getUsuarios(): Deferred<Response<List<Usuario>>>
+    @GET("usuario/{idusuario}")
+    fun getUsuarioById(@Path("idusuario") id: Int): Deferred<Response<Usuario>>
 
     @POST("register")
     fun register(@Body usuario: Usuario): Deferred<Response<Usuario>>
 
-    @GET("mensaje")
-    fun getMensajes(): Deferred<Response<List<Mensaje>>>
-
-    @GET("mensajes/sender/{senderid}")
-    fun getMensajesBySenderId(@Path("senderid") senderid: Int): Deferred<Response<List<Mensaje>>>
-
-    @GET("mensajes/receiver/{receiverid}")
-    fun getMensajesByReceiverId(@Path("receiverid") receiverid: Int): Deferred<Response<List<Mensaje>>>
+    @GET("mensajes/producto/{idproducto}")
+    fun obtenerMensajesPorProducto(
+        @Path("idproducto") idProducto: Int, @Query("senderid") senderId: Int, @Query("receiverid") receiverId: Int): Deferred<Response<List<Mensaje>>>
 
     @POST("mensaje")
     fun insertarMensaje(@Body mensaje: Mensaje): Deferred<Response<Mensaje>>

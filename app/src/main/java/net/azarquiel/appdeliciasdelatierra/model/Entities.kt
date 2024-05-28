@@ -15,13 +15,13 @@ data class Usuario (
 
 data class Producto(
     val idproducto: Int? = null,
+    var usuario: Usuario,
     var nombre: String,
     var descripcion: String,
     var fecha: String,
     var estado: String,
     var categoria: Categoria,
     var imagen: String,
-    var idusuario: Int,
     ): Serializable
 
 
@@ -43,11 +43,12 @@ data class Intercambio (
 ): Serializable
 
 data class Mensaje(
-    val senderid: Usuario,
-    val receiverid: Usuario,
+    val senderid: Int,
+    val receiverid: Int,
     val texto: String,
     val fecha: String,
-    val leido: Boolean
+    val leido: Boolean,
+    val idproducto: Int
 
     ): Serializable
 
