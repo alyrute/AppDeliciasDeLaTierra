@@ -6,8 +6,8 @@
     android:layout_height="wrap_content"
     android:onClick="onClickProducto"
     android:layout_margin="2dp"
-    android:layout_gravity="center_horizontal"
-    card_view:cardBackgroundColor="@color/white"
+    android:layout_gravity="center"
+    card_view:cardBackgroundColor="@color/orange"
     card_view:cardCornerRadius="16dp"
     card_view:cardElevation="1dp"
     card_view:cardUseCompatPadding="false"
@@ -35,38 +35,63 @@
             android:id="@+id/tvrownombreproducto"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="10dp"
             android:text="TextView"
-            android:textColor="@color/brown"
-            android:textSize="22sp"
+            android:textColor="@color/black"
+            android:textSize="20sp"
             android:textStyle="bold"
             card_view:layout_constraintEnd_toEndOf="parent"
-            card_view:layout_constraintHorizontal_bias="0.719"
-            card_view:layout_constraintStart_toStartOf="parent"
+            card_view:layout_constraintStart_toEndOf="@+id/frameLayout"
             card_view:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/tvrowdescripcion"
-            android:layout_width="185dp"
-            android:layout_height="51dp"
-            android:layout_marginTop="8dp"
+            android:layout_width="203dp"
+            android:layout_height="52dp"
+            android:layout_marginStart="22dp"
+            android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
             android:text="TextView"
+            android:textColor="@color/white"
             android:textSize="18dp"
             card_view:layout_constraintBottom_toBottomOf="parent"
             card_view:layout_constraintEnd_toEndOf="parent"
+            card_view:layout_constraintHorizontal_bias="0.0"
             card_view:layout_constraintStart_toEndOf="@+id/frameLayout"
             card_view:layout_constraintTop_toBottomOf="@+id/tvrownombreproducto"
-            card_view:layout_constraintVertical_bias="0.122" />
+            card_view:layout_constraintVertical_bias="0.0" />
 
         <TextView
             android:id="@+id/tvrowproductonombre"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/white"
             android:text="TextView"
-            card_view:layout_constraintTop_toBottomOf="@+id/tvrowdescripcion"
-            tools:layout_editor_absoluteX="144dp" />
+            card_view:layout_constraintStart_toEndOf="@+id/frameLayout"
+            card_view:layout_constraintTop_toBottomOf="@+id/tvrowdescripcion" />
+
+        <TextView
+            android:id="@+id/tvrowproductoprovincia"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="10dp"
+            android:text="TextView"
+            android:textColor="@color/white"
+            card_view:layout_constraintStart_toEndOf="@+id/tvrowproductonombre"
+            card_view:layout_constraintTop_toBottomOf="@+id/tvrowdescripcion" />
+
+        <TextView
+            android:id="@+id/tvrowproductopoblacion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:text="TextView"
+            android:textColor="@color/white"
+            card_view:layout_constraintStart_toEndOf="@+id/tvrowproductoprovincia"
+            card_view:layout_constraintTop_toTopOf="@+id/tvrowproductoprovincia" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

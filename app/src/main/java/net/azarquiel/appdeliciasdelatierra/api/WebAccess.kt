@@ -15,5 +15,7 @@ object WebAccess {
             .build()
 
         return@lazy retrofit.create(DeliciasService::class.java)
+
+        //La del IES AZARQUIEL  172.19.185.0
     }
 }

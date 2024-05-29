@@ -44,10 +44,14 @@ class AdapterProducto(val context: Context, val layout: Int) : RecyclerView.Adap
             val tvrownombreproducto = itemView.findViewById<TextView>(R.id.tvrownombreproducto)
             val tvrowdescripcion = itemView.findViewById<TextView>(R.id.tvrowdescripcion)
             val tvrowproductonombre = itemView.findViewById<TextView>(R.id.tvrowproductonombre)
+            val tvrowproductoprovincia = itemView.findViewById<TextView>(R.id.tvrowproductoprovincia)
+            val tvrowproductopoblacion = itemView.findViewById<TextView>(R.id.tvrowproductopoblacion)
 
             tvrownombreproducto.text = dataItem.nombre
             tvrowdescripcion.text = dataItem.descripcion
             tvrowproductonombre.text = dataItem.usuario.nombre
+            tvrowproductoprovincia.text = dataItem.usuario.provincia
+            tvrowproductopoblacion.text = dataItem.usuario.poblacion
 
             val base64Image = dataItem.imagen
             val decodedBytes = Base64.decode(base64Image, Base64.DEFAULT)

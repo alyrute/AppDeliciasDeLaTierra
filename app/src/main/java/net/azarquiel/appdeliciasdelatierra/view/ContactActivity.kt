@@ -49,12 +49,16 @@ class ContactActivity : AppCompatActivity() {
         viewModel.getMensajesByIdProducto(idproducto, senderid, receiverid).observe(this, Observer { mensajes ->
             if (mensajes != null) {
                 adapter.setMensajes(mensajes)
-                Log.d("eo", "Mensajes recibidos: $mensajes")
-                Log.d("eo", "Cantidad de mensajes: ${mensajes.size}")
+                binding.contact.rvmensaje.scrollToPosition(adapter.itemCount - 1)
+                Log.d("ContactActivity", "Mensajes recibidos: $mensajes")
             } else {
                 Log.e("ContactActivity", "No se encontraron mensajes.")
             }
         })
+
+        binding.bntenviar.setOnClickListener {
+            enviarMensaje()
+        }
 
 
 
@@ -78,6 +82,8 @@ class ContactActivity : AppCompatActivity() {
         adapter = AdapterMensaje(this, R.layout.rowcontact)
         binding.contact.rvmensaje.layoutManager = LinearLayoutManager(this)
         binding.contact.rvmensaje.adapter = adapter
+
+
     }
 
     private fun enviarMensaje() {
@@ -87,30 +93,30 @@ class ContactActivity : AppCompatActivity() {
             val fechaFormateada = formatoFecha.format(Date())
             val usuario = obtenerUsuario()
 
-            val mensaje = producto.idproducto?.let {
-                Mensaje(
-                    receiverid = producto.usuario.idusuario ?: -1,
-                    senderid = usuario?.idusuario ?: -1,
-                    texto = textoMensaje,
-                    fecha = fechaFormateada,
-                    leido = false,
-                    idproducto = it
-                )
-            }
-            mensaje?.let {
-                lifecycleScope.launch {
-                    enviarMensajeAlReceptor(it)
-                }
+            val mensaje = Mensaje(
+                receiverid = producto.usuario.idusuario ?: -1,
+                senderid = usuario?.idusuario ?: -1,
+                texto = textoMensaje,
+                fecha = fechaFormateada,
+                leido = false,
+                idproducto = producto.idproducto ?: -1
+            )
+
+            lifecycleScope.launch {
+                viewModel.insertarMensaje(mensaje)
+                adapter.addMensaje(mensaje)
+                binding.tvMensaje.text.clear()
+                binding.contact.rvmensaje.scrollToPosition(adapter.itemCount - 1)
             }
         }
-    }
+    }/*
 
     private fun enviarMensajeAlReceptor(mensaje: Mensaje) {
         lifecycleScope.launch {
             viewModel.insertarMensaje(mensaje)
             binding.tvMensaje.text.clear()
         }
-    }
+    }*/
 
     private fun obtenerUsuario(): Usuario? {
         val sharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE)
