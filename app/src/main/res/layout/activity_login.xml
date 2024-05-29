@@ -62,19 +62,21 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/password"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginStart="33dp"
+        android:layout_marginTop="33dp"
         android:layout_marginEnd="30dp"
-        android:background="@color/brown"
-        android:text="Login"
-        android:gravity="center"
-        android:padding="10dp"
-        android:textColor="@color/white"
-        android:textStyle="bold"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/button"
+        android:backgroundTint="@color/green"
         android:clickable="true"
-        android:textSize="22sp"
         android:focusable="true"
-        android:minHeight="48dp"/>
+        android:gravity="center"
+        android:minHeight="48dp"
+        android:padding="10dp"
+        android:text="Login"
+        android:textColor="@color/white"
+        android:textStyle="bold" />
+
 
     <TextView
         android:id="@+id/register"
@@ -82,7 +84,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/loginButton"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="33dp"
         android:textSize="20sp"
         android:shadowRadius="30"
         android:textStyle="bold"
@@ -91,6 +93,6 @@
 
     <include
         android:id="@+id/log"
-        layout="@layout/content_login"/>
+        layout="@layout/content_login" />
 
 </RelativeLayout>
