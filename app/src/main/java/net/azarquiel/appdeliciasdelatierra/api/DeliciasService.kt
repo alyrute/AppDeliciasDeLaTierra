@@ -52,8 +52,8 @@ interface DeliciasService {
     fun insertarMensaje(@Body mensaje: Mensaje): Deferred<Response<Mensaje>>
 
 
-    @DELETE("producto/{id}")
-    fun deleteProduct(@Path("id") productId: Int): Deferred<Response<Void>>
+    @DELETE("producto/{idproducto}")
+    fun deleteProduct(@Path("idproducto") productId: Int): Deferred<Response<Void>>
 
 
 

@@ -2,16 +2,16 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    android:layout_margin="5dp"
     android:onClick="onClickProducto"
     card_view:cardBackgroundColor="@color/white"
     card_view:cardCornerRadius="16dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-       >
+        android:layout_height="match_parent">
 
         <FrameLayout
             android:id="@+id/frameLayout"
@@ -42,7 +42,7 @@
 
         <TextView
             android:id="@+id/tvrowdescripcion"
-            android:layout_width="203dp"
+            android:layout_width="248dp"
             android:layout_height="52dp"
             android:layout_marginStart="22dp"
             android:layout_marginTop="10dp"
