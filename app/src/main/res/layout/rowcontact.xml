@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:padding="10dp"
     >
 
 
@@ -13,12 +14,12 @@
         android:padding="8dp">
 
         <!-- ImageView a la izquierda -->
-            <ImageView
-                android:id="@+id/imageView"
-                android:layout_width="36dp"
-                android:layout_height="42dp"
-                android:padding="1dp"
-                app:srcCompat="@drawable/chat" />
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="36dp"
+            android:layout_height="42dp"
+            android:padding="1dp"
+            app:srcCompat="@drawable/chat" />
 
         <!-- TextView a la derecha -->
         <TextView
@@ -28,7 +29,8 @@
             android:layout_weight="1"
             android:padding="10dp"
             android:textColor="@color/orange"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            android:textStyle="bold"/>
 
     </LinearLayout>
 

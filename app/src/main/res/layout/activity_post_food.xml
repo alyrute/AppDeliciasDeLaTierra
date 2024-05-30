@@ -4,8 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.PostFoodActivity"
-    android:padding="20dp">
+    tools:context=".view.PostFoodActivity">
+    <ImageView
+        android:id="@+id/backgroundImage"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/imgsplash"
+        android:alpha="0.5" />
 
     <!-- Imagen del producto -->
     <ImageView
@@ -20,71 +26,103 @@
         android:src="@drawable/imgpulsefoto" />
 
     <!-- Texto "Categoría" -->
+
+    <!-- Spinner para seleccionar categoría -->
+
+    <!-- Texto "Producto" -->
+
+    <!-- EditText para el producto -->
+
+    <!-- Texto "Descripción" -->
+
+
     <TextView
         android:id="@+id/textViewCategory"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="128dp"
+        android:layout_height="22dp"
         android:layout_below="@id/imgsubirfoto"
-        android:layout_marginTop="30dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_gravity="center_vertical"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="267dp"
         android:text="Categoría"
         android:textColor="#000000"
         android:textSize="18sp" />
 
-    <!-- Spinner para seleccionar categoría -->
     <Spinner
         android:id="@+id/spinnerCategories"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="380dp"
+        android:layout_height="52dp"
         android:layout_below="@id/textViewCategory"
-        android:layout_marginTop="8dp"
-        android:padding="12dp"
-        android:background="@color/lightorange"/>
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_gravity="center_vertical"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="7dp"
+        android:layout_marginEnd="15dp"
+        android:background="@color/lightorange"
+        android:padding="12dp" />
 
-    <!-- Texto "Producto" -->
     <TextView
         android:id="@+id/textViewProduct"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/spinnerCategories"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_gravity="center_vertical"
+        android:layout_marginStart="15dp"
         android:layout_marginTop="24dp"
+        android:layout_marginEnd="323dp"
         android:text="Producto"
         android:textColor="#000000"
         android:textSize="18sp" />
 
-    <!-- EditText para el producto -->
     <EditText
         android:id="@+id/tvproducto"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="380dp"
+        android:layout_height="52dp"
         android:layout_below="@id/textViewProduct"
-        android:layout_marginTop="8dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="14dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="16dp"
+        android:background="@color/lightorange"
         android:hint="Producto"
         android:inputType="text"
-        android:padding="12dp"
-        android:background="@color/lightorange"/>
+        android:padding="12dp" />
 
-    <!-- Texto "Descripción" -->
     <TextView
         android:id="@+id/textViewDescription"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/tvproducto"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="15dp"
         android:layout_marginTop="24dp"
+        android:layout_marginEnd="302dp"
         android:text="Descripción"
         android:textColor="#000000"
         android:textSize="18sp" />
 
     <EditText
         android:id="@+id/tvdescipcion"
-        android:layout_width="370dp"
+        android:layout_width="379dp"
         android:layout_height="117dp"
-        android:layout_below="@id/textViewDescription"
+        android:layout_below="@+id/textViewDescription"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="14dp"
         android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
         android:background="@color/lightorange"
         android:hint="Descripción"
         android:inputType="textMultiLine"
         android:padding="12dp" />
-
 
     <TextView
         android:id="@+id/publishFoodButton"
@@ -97,7 +135,7 @@
         android:layout_marginEnd="0dp"
         android:layout_marginBottom="16dp"
         android:background="@drawable/button"
-        android:backgroundTint="@color/green"
+        android:backgroundTint="@color/orange"
         android:clickable="true"
         android:focusable="true"
         android:gravity="center"

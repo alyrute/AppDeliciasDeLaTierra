@@ -8,21 +8,21 @@
         android:id="@+id/my_toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="@color/brown" />
+        android:background="@color/orange" />
 
     <!-- Imagen de fondo -->
     <ImageView
         android:id="@+id/backgroundImage"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:alpha="0.3"
         android:scaleType="centerCrop"
-        android:src="@drawable/imgsplash"
-        android:alpha="0.5" />
+        android:src="@drawable/imgsplash" />
 
     <View
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#80FFFFFF" />
+        android:background="#80000000" />
 
 
     <TextView
@@ -43,22 +43,22 @@
         android:layout_marginTop="80dp"
         android:layout_marginBottom="16dp"
         android:text="Delicias De La Tierra"
-        android:textColor="@color/brown"
+        android:textColor="@color/orange"
         android:textSize="24sp"
         android:textStyle="bold" />
 
     <TextView
         android:id="@+id/infoText"
         android:layout_width="wrap_content"
-        android:layout_height="309dp"
+        android:layout_height="wrap_content"
         android:layout_below="@id/titulo"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="56dp"
+        android:layout_marginTop="31dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="32dp"
         android:text="Delicias de la Tierra es una iniciativa que fomenta el intercambio de comida entre vecinos para combatir el desperdicio y promover el aprovechamiento responsable de los alimentos. A través de nuestra app, los usuarios pueden compartir productos frescos y platos caseros, creando una comunidad unida y sostenible. Juntos, transformamos el excedente en una oportunidad para disfrutar de la diversidad culinaria local y apoyar prácticas más ecológicas y conscientes. ¡Únete a nosotros y descubre las Delicias de la Tierra en tu propio vecindario!"
-        android:textColor="@color/brown"
-        android:textSize="18sp"
+        android:textColor="@color/orange"
+        android:textSize="20sp"
         android:textStyle="bold" />
 
     <TextView
@@ -67,10 +67,10 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/infoText"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="30dp"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="20dp"
-        android:background="@color/white"
+        android:background="@drawable/buttonwhite"
         android:clickable="true"
         android:drawableLeft="@drawable/itomate"
         android:focusable="true"
@@ -78,7 +78,8 @@
         android:minHeight="48dp"
         android:padding="10dp"
         android:text="Buscar Alimentos"
-        android:textColor="@color/brown"
+        android:textColor="@color/orange"
+        android:textSize="20sp"
         android:textStyle="bold" />
 
     <TextView
@@ -89,16 +90,39 @@
         android:layout_marginTop="16dp"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
-        android:background="@color/white"
         android:text="Publicar Alimentos"
         android:gravity="center"
         android:padding="10dp"
-        android:textColor="@color/brown"
+        android:background="@drawable/buttonwhite"
+        android:textSize="20sp"
+        android:textColor="@color/orange"
         android:textStyle="bold"
         android:clickable="true"
         android:drawableLeft="@drawable/ibrocoli"
         android:focusable="true"
         android:minHeight="48dp"/>
+
+    <TextView
+        android:id="@+id/btonareapersona"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/publishFoodButton"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+
+        android:text="Mis productos"
+        android:gravity="center"
+        android:padding="10dp"
+        android:textColor="@color/orange"
+        android:background="@drawable/buttonwhite"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:clickable="true"
+        android:drawableLeft="@drawable/casas"
+        android:focusable="true"
+        android:minHeight="48dp"/>
+
 
     <!-- Espacio para un tercer botón futuro -->
     <View

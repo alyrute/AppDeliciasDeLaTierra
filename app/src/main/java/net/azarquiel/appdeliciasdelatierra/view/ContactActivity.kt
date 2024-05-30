@@ -37,7 +37,7 @@ class ContactActivity : AppCompatActivity() {
         producto = intent.getSerializableExtra("producto") as Producto
 
         val usuario = obtenerUsuario()
-        Log.d("UsuarioContac", "$usuario")
+
 
         initRV()
         setupObservers()

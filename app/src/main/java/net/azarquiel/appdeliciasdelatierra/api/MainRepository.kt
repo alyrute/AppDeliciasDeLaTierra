@@ -29,14 +29,16 @@ class MainRepository() {
         return emptyList()
     }
 
-    suspend fun getProductos(idusuario:Int): Producto? {
+    suspend fun getProductos(idusuario: Int): List<Producto> {
         val webResponse = service.getProductos(idusuario).await()
-        return if (webResponse.isSuccessful) {
-            webResponse.body()
-        } else {
-            null
-        }
+        if (webResponse.isSuccessful) {
+            return webResponse.body()!!.producto
+            }
+        return emptyList()
+
     }
+
+
     suspend fun saveProducto(producto: Producto): Producto? {
         val webResponse = service.saveProducto(producto).await()
         if (webResponse.isSuccessful) {
@@ -50,27 +52,12 @@ class MainRepository() {
         val webResponse = service.getUsuarioByProducto(idproducto).await()
         if (webResponse.isSuccessful) {
             val usuario = webResponse.body()
-            Log.d("coño" ,"$usuario")
+
             return usuario
         }
         return null
     }
 
-    suspend fun getIntercambios(): List<Intercambio> {
-        val webResponse = service.getIntercambios().await()
-        if (webResponse.isSuccessful) {
-            return webResponse.body()!!
-        }
-        return emptyList()
-    }
-
-    suspend fun insertarIntercambio(intercambio: Intercambio): Intercambio? {
-        val webResponse = service.insertarIntercambio(intercambio).await()
-        if (webResponse.isSuccessful) {
-            return webResponse.body()
-        }
-        return null
-    }
 
     suspend fun getLogin(email: String, password: String): Usuario? {
         val webResponse = service.getLogin(email, password).await()
@@ -97,15 +84,6 @@ class MainRepository() {
         return null
     }
 
-/*
-    suspend fun getMensajes(): List<Mensaje>? {
-        val webResponse = service.getMensajes().await()
-        if (webResponse.isSuccessful) {
-            return webResponse.body()!!
-        }
-        return emptyList()
-    }*/
-
     suspend fun getMensajesByIdProducto(idproducto: Int, senderid: Int, receiverid: Int): List<Mensaje> {
         val mensajesRecibidosResponse = service.obtenerMensajesPorProducto(idproducto, senderid, receiverid).await()
 
@@ -117,24 +95,18 @@ class MainRepository() {
     }
 
     suspend fun insertarMensaje(mensaje: Mensaje): Mensaje? {
-        return try {
-            val webResponse = service.insertarMensaje(mensaje).await()
-            Log.d("coño" , "$mensaje")
-            if (webResponse.isSuccessful) {
-                webResponse.body()
-
-            } else {
-
-                null
-            }
-        } catch (e: IOException) {
-            // Manejar la excepción de red
+        val webResponse = service.insertarMensaje(mensaje).await()
+        return if (webResponse.isSuccessful) {
+            webResponse.body()
+        } else {
             null
         }
     }
 
-
-
+    suspend fun deleteProduct(productId: Int): Boolean {
+        val webResponse = service.deleteProduct(productId).await()
+        return webResponse.isSuccessful
+    }
 
 }
 

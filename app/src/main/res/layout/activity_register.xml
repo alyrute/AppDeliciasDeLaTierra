@@ -4,15 +4,23 @@
     android:layout_height="match_parent"
     android:background="@color/white">
 
+    <ImageView
+        android:id="@+id/backgroundImage"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/imgsplash"
+        android:alpha="0.5" />
+
     <!-- Logo -->
     <ImageView
         android:id="@+id/logo"
         android:layout_width="match_parent"
-        android:layout_height="252dp"
+        android:layout_height="307dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="0dp"
-        android:src="@drawable/logoverde" />
+        android:src="@drawable/logonasf" />
 
     <!-- Campo de nombre -->
     <EditText
@@ -110,13 +118,14 @@
         android:layout_marginTop="164dp"
         android:layout_marginEnd="30dp"
         android:background="@drawable/button"
-        android:backgroundTint="@color/green"
+        android:backgroundTint="@color/orange"
         android:clickable="true"
         android:focusable="true"
         android:gravity="center"
         android:minHeight="48dp"
         android:padding="10dp"
         android:text="Registrarse"
+        android:textSize="20sp"
         android:textColor="@color/white"
         android:textStyle="bold" />
 
@@ -128,12 +137,14 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="16dp"
         android:text="¿Ya tienes cuenta? Inicia sesión aquí"
-        android:textColor="@color/brown"
+        android:textColor="@color/orange"
         android:textStyle="bold" />
 
     <!-- Contenido incluido -->
     <include
         android:id="@+id/reg"
-        layout="@layout/content_register" />
+        layout="@layout/content_register"
+        android:layout_width="match_parent"
+        android:layout_height="1473dp" />
 
 </RelativeLayout>

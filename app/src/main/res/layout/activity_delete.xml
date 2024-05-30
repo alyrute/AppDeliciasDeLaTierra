@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context=".view.CategoriasActivity">
+    tools:context=".view.DeleteActivity"
+   >
     <ImageView
         android:id="@+id/backgroundImage"
         android:layout_width="match_parent"
@@ -16,19 +17,26 @@
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:fitsSystemWindows="true">
+        android:layout_height="80dp"
+        android:fitsSystemWindows="true"
+        android:gravity="center">
 
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/toolbar"
-            app:title="Categorias"
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize" />
+            android:layout_height="match_parent"
+            android:padding="15dp" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <include layout="@layout/content_categorias"
-        android:id="@+id/cat"/>
+
+    <include
+        android:id="@+id/deleted"
+        layout="@layout/content_delete"
+        />
+
+
+
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

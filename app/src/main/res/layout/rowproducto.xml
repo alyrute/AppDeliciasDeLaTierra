@@ -2,32 +2,28 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:onClick="onClickProducto"
-    android:layout_margin="2dp"
-    android:layout_gravity="center"
-    card_view:cardBackgroundColor="@color/orange"
-    card_view:cardCornerRadius="16dp"
-    card_view:cardElevation="1dp"
-    card_view:cardUseCompatPadding="false"
-    card_view:contentPadding="10dp">
+    card_view:cardBackgroundColor="@color/white"
+    card_view:cardCornerRadius="16dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="374dp"
-        android:layout_height="wrap_content">
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+       >
 
         <FrameLayout
             android:id="@+id/frameLayout"
             android:layout_width="133dp"
             android:layout_height="133dp"
-            android:layout_centerHorizontal="true">
+            android:layout_centerHorizontal="true"
+            android:padding="10dp">
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/ivrowproducto"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
-
         </FrameLayout>
 
 
@@ -37,7 +33,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:text="TextView"
-            android:textColor="@color/black"
+            android:textColor="@color/orange"
             android:textSize="20sp"
             android:textStyle="bold"
             card_view:layout_constraintEnd_toEndOf="parent"
@@ -52,7 +48,7 @@
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
             android:text="TextView"
-            android:textColor="@color/white"
+            android:textColor="@color/orange"
             android:textSize="18dp"
             card_view:layout_constraintBottom_toBottomOf="parent"
             card_view:layout_constraintEnd_toEndOf="parent"
@@ -67,20 +63,9 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:layout_marginTop="10dp"
-            android:textColor="@color/white"
             android:text="TextView"
+            android:textColor="@color/orange"
             card_view:layout_constraintStart_toEndOf="@+id/frameLayout"
-            card_view:layout_constraintTop_toBottomOf="@+id/tvrowdescripcion" />
-
-        <TextView
-            android:id="@+id/tvrowproductoprovincia"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="10dp"
-            android:text="TextView"
-            android:textColor="@color/white"
-            card_view:layout_constraintStart_toEndOf="@+id/tvrowproductonombre"
             card_view:layout_constraintTop_toBottomOf="@+id/tvrowdescripcion" />
 
         <TextView
@@ -88,10 +73,21 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
+            android:layout_marginTop="10dp"
             android:text="TextView"
-            android:textColor="@color/white"
-            card_view:layout_constraintStart_toEndOf="@+id/tvrowproductoprovincia"
-            card_view:layout_constraintTop_toTopOf="@+id/tvrowproductoprovincia" />
+            android:textColor="@color/orange"
+            card_view:layout_constraintStart_toEndOf="@+id/tvrowproductonombre"
+            card_view:layout_constraintTop_toBottomOf="@+id/tvrowdescripcion" />
+
+        <TextView
+            android:id="@+id/tvrowproductoprovincia"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:text="TextView"
+            android:textColor="@color/orange"
+            card_view:layout_constraintStart_toEndOf="@+id/tvrowproductopoblacion"
+            card_view:layout_constraintTop_toTopOf="@+id/tvrowproductopoblacion" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -11,7 +11,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import net.azarquiel.appdeliciasdelatierra.R
 import net.azarquiel.appdeliciasdelatierra.model.Producto
-class AdapterProducto(val context: Context, val layout: Int) : RecyclerView.Adapter<AdapterProducto.ViewHolder>() {
+class AdapterDelete(val context: Context, val layout: Int) : RecyclerView.Adapter<AdapterDelete.ViewHolder>() {
 
     private var dataList: List<Producto> = emptyList()
 
@@ -40,23 +40,16 @@ class AdapterProducto(val context: Context, val layout: Int) : RecyclerView.Adap
 
     inner class ViewHolder(viewlayout: View) : RecyclerView.ViewHolder(viewlayout) {
         fun bind(dataItem: Producto) {
-            val ivrowproducto = itemView.findViewById<ImageView>(R.id.ivrowproducto)
-            val tvrownombreproducto = itemView.findViewById<TextView>(R.id.tvrownombreproducto)
-            val tvrowdescripcion = itemView.findViewById<TextView>(R.id.tvrowdescripcion)
-            val tvrowproductonombre = itemView.findViewById<TextView>(R.id.tvrowproductonombre)
-            val tvrowproductopoblacion = itemView.findViewById<TextView>(R.id.tvrowproductopoblacion)
-            val tvrowproductoprovincia = itemView.findViewById<TextView>(R.id.tvrowproductoprovincia)
+            val ivrowdeleteproducto = itemView.findViewById<ImageView>(R.id.ivrowdeleteproducto)
+            val tvrowdeleted = itemView.findViewById<TextView>(R.id.tvrowdeleted)
 
-            tvrownombreproducto.text = dataItem.nombre
-            tvrowdescripcion.text = dataItem.descripcion
-            tvrowproductonombre.text = dataItem.usuario.nombre
-            tvrowproductopoblacion.text = dataItem.usuario.provincia
-            tvrowproductoprovincia.text = dataItem.usuario.poblacion
+            tvrowdeleted.text = dataItem.nombre
+
 
             val base64Image = dataItem.imagen
             val decodedBytes = Base64.decode(base64Image, Base64.DEFAULT)
             val bitmap = BitmapFactory.decodeByteArray(decodedBytes, 0, decodedBytes.size)
-            ivrowproducto.setImageBitmap(bitmap)
+            ivrowdeleteproducto.setImageBitmap(bitmap)
 
             itemView.tag = dataItem
         }

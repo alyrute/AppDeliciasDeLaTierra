@@ -3,8 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp"
-    android:windowSoftInputMode="adjustResize">
+    >
 
     <!-- CardView para la cabecera del destinatario -->
     <androidx.cardview.widget.CardView
@@ -12,12 +11,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
-        app:cardCornerRadius="25dp">
+        app:cardCornerRadius="25dp"
+        android:padding="25dp">
 
         <LinearLayout
             android:id="@+id/cabecera_destinatario"
             android:layout_width="match_parent"
-            android:layout_height="83dp"
+            android:layout_height="90dp"
             android:background="@color/orange"
             android:gravity="center_vertical"
             android:orientation="horizontal"
@@ -43,6 +43,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="34dp"
                     android:text="Nombre"
+                    android:textColor="@color/white"
                     android:textSize="18sp"
                     android:textStyle="bold" />
 
@@ -51,6 +52,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="34dp"
                     android:text="Población, Provincia"
+                    android:textColor="@color/white"
                     android:textSize="16sp" />
             </LinearLayout>
         </LinearLayout>
@@ -66,7 +68,7 @@
         app:cardCornerRadius="25dp">
 
         <LinearLayout
-            android:layout_width="370dp"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/white"
             android:orientation="horizontal"
@@ -96,9 +98,13 @@
     <include
         android:id="@+id/contact"
         layout="@layout/content_contact"
-        android:layout_width="359dp"
-        android:layout_height="522dp"
+        android:layout_width="393dp"
+        android:layout_height="629dp"
         android:layout_above="@+id/cuadotexto"
-        android:layout_margin="10dp"
-        android:layout_marginBottom="20dp" />
+        android:layout_marginStart="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="10dp" />
 </RelativeLayout>

@@ -6,6 +6,9 @@
     <color name="brown">#B86D29</color>
     <color name="orange">#E88B2D </color>
     <color name="lightorange">#DDCDBE</color>
+    <color name="red">#FF1100</color>
+    <color name="orangelight">#EDCCC1</color>
+
 
 
 </resources>

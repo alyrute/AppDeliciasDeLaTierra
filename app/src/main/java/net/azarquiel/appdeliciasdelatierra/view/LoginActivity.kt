@@ -90,6 +90,7 @@ class LoginActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
+
     private fun showToast(message: String) {
         runOnUiThread {
             Toast.makeText(this, message, Toast.LENGTH_SHORT).show()

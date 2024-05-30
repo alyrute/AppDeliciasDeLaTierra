@@ -2,7 +2,7 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <item>
         <shape>
-            <solid android:color="@color/orange" /> <!-- color de fondo -->
+            <solid android:color="@color/white" /> <!-- color de fondo -->
             <corners android:radius="35dp" /> <!-- radio de las esquinas -->
         </shape>
     </item>

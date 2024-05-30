@@ -42,8 +42,9 @@ class SearcherFoodActivity : AppCompatActivity() {
 
         viewModel.getProductosPorCategoria(categoria.idcategoria).observe(this, Observer { productos ->
             productos?.let {
+                producto=it
+                Log.d("Soy tonta", "$producto")
                 val productosFiltrados = it.filter { producto -> producto.usuario.idusuario != idusuario }
-                Log.d("SearcherFoodActivity", "Productos filtrados: $productosFiltrados")
                 adapter.setProducto(productosFiltrados)
             }
         })

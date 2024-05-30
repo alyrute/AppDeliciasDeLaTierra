@@ -20,6 +20,10 @@
         android:theme="@style/Theme.AppDeliciasDeLaTierra"
         tools:targetApi="31">
         <activity
+            android:name=".view.DeleteActivity"
+            android:exported="false"
+            android:theme="@style/Theme.AppDeliciasDeLaTierra" />
+        <activity
             android:name=".view.ContactActivity"
             android:exported="false"
             android:theme="@style/Theme.AppDeliciasDeLaTierra" />
