@@ -38,8 +38,6 @@ class CategoriasActivity : AppCompatActivity() {
         binding = ActivityCategoriasBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-
-
         viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
         initRV()
         getCategoria()
@@ -53,6 +51,7 @@ class CategoriasActivity : AppCompatActivity() {
             }
         })
     }
+
     private fun initRV() {
         adapter = AdapterCategorias(this, R.layout.rowcategoria)
         binding.cat.rvcategoria.adapter = adapter

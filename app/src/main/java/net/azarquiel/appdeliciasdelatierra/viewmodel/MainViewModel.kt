@@ -37,7 +37,6 @@ class MainViewModel : ViewModel() {
         val productos = MutableLiveData<List<Producto>>()
         viewModelScope.launch(Main) {
             productos.value = repository.getProductosPorCategoria(idcategoria)
-            Log.d("eyy//concategora", "$productos")
         }
         return productos
     }
@@ -48,14 +47,6 @@ class MainViewModel : ViewModel() {
             productoResponse.value = repository.saveProducto(producto)
         }
         return productoResponse
-    }
-
-    fun getUsuarioByProducto(idproducto: Int): MutableLiveData<Usuario?> {
-        val respuesta = MutableLiveData<Usuario?>()
-        viewModelScope.launch(Main) {
-            respuesta.value = repository.getUsuarioByProducto(idproducto)
-        }
-        return respuesta
     }
 
     fun getUsuarioById(idusuario: Int): MutableLiveData<Usuario>  {
@@ -70,7 +61,6 @@ class MainViewModel : ViewModel() {
         val productos = MutableLiveData<List<Producto>>()
         viewModelScope.launch {
             productos.value = repository.getProductos(idusuario)
-            Log.d("eyy//Produ", "$productos")
 
         }
         return productos
@@ -105,7 +95,7 @@ class MainViewModel : ViewModel() {
         repository.insertarMensaje(mensaje)
     }
 
-    fun deleteProduct(productId: Int): MutableLiveData<Boolean> {
+    fun deleteProduct(productId: Int): LiveData<Boolean> {
         val result = MutableLiveData<Boolean>()
         viewModelScope.launch {
             result.value = repository.deleteProduct(productId)

@@ -23,7 +23,11 @@ import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 import android.util.Base64
+import android.view.LayoutInflater
+import android.widget.ImageView
+import android.widget.TextView
 import com.google.gson.Gson
+import net.azarquiel.appdeliciasdelatierra.R
 import net.azarquiel.appdeliciasdelatierra.model.Usuario
 
 class PostFoodActivity : AppCompatActivity() {
@@ -113,25 +117,21 @@ class PostFoodActivity : AppCompatActivity() {
 
                 val categoria = Categoria(categoriaSeleccionada.idcategoria, categoriaSeleccionada.nombre, categoriaSeleccionada.imagen)
 
-                // Crear el producto con los objetos
                 val producto = Producto( null, usuario, nombre, descripcion, fechaFormateada, estado, categoria, imagenBase64)
-                Log.d("holaaa", "$producto")
 
-                // Guardar el producto utilizando el ViewModel
+
+
                 viewModel.saveProducto(producto).observe(this, Observer { productoGuardado ->
                     if (productoGuardado != null) {
-                        this.showToast("Producto guardado con éxito")
+                        showCustomToast(this, "Producto guardado con éxito")
                         navigateToMain()
                     } else {
-                        this.showToast("Error al guardar el producto")
+                        showCustomToast(this, "Error al guardar el producto")
                     }
                 })
             } else {
-                this.showToast("Por favor, selecciona una imagen para el producto")
+                showCustomToast(this, "Por favor, selecciona una imagen para el producto")
             }
-        } else {
-            // Manejar el caso en que idusuario es null
-            this.showToast("Error: No se pudo obtener el ID del usuario")
         }
     }
 
@@ -152,5 +152,21 @@ class PostFoodActivity : AppCompatActivity() {
         val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
         finish()
+    }
+
+    fun showCustomToast(context: Context, message: String) {
+        val inflater = LayoutInflater.from(context)
+        val layout = inflater.inflate(R.layout.toast_custom, null)
+
+        val imageView = layout.findViewById<ImageView>(R.id.logo)
+        imageView.setImageResource(R.drawable.logonasf) // Set your logo
+
+        val textView = layout.findViewById<TextView>(R.id.texto)
+        textView.text = message
+
+        val toast = Toast(context)
+        toast.duration = Toast.LENGTH_SHORT
+        toast.view = layout
+        toast.show()
     }
 }

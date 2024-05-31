@@ -1,7 +1,11 @@
 package net.azarquiel.appdeliciasdelatierra.view
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.view.LayoutInflater
+import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
 import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
@@ -55,15 +59,15 @@ class RegisterActivity : AppCompatActivity() {
 
     private fun validateFields(email: String, password: String, nombre: String, apellidos: String, poblacion: String, provincia: String): Boolean {
         if (email.isEmpty() || !android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            showToast("Por favor, introduce un correo electrónico válido")
+            showCustomToast(this, "Por favor, ingrese el email y la contraseña.")
             return false
         }
         if (password.length < 6) {
-            showToast("La contraseña debe tener al menos 6 caracteres")
+            showCustomToast(this ,"Por favor, introduce un correo electrónico válido")
             return false
         }
         if (nombre.isEmpty() || apellidos.isEmpty() || poblacion.isEmpty() || provincia.isEmpty()) {
-            showToast("Todos los campos son obligatorios")
+            showCustomToast(this , "Todos los campos son obligatorios")
             return false
         }
         return true
@@ -72,10 +76,10 @@ class RegisterActivity : AppCompatActivity() {
     private fun registerUser(usuario: Usuario) {
         viewModel.register(usuario).observe(this, Observer { usuarioRegistrado ->
             if (usuarioRegistrado != null) {
-                showToast("Registro exitoso")
+                showCustomToast(this,"Registro exitoso")
                 navigateToLogin()
             } else {
-                showToast("Error al registrar usuario")
+                showCustomToast(this, "Error al registrar usuario")
             }
         })
     }
@@ -86,7 +90,18 @@ class RegisterActivity : AppCompatActivity() {
         finish()
     }
 
-    private fun showToast(message: String) {
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+    fun showCustomToast(context: Context, message: String) {
+        val inflater = LayoutInflater.from(context)
+        val layout = inflater.inflate(R.layout.toast_custom, null)
+
+        val imageView = layout.findViewById<ImageView>(R.id.logo)
+        imageView.setImageResource(R.drawable.logonasf) // Set your logo
+
+        val textView = layout.findViewById<TextView>(R.id.texto)
+        textView.text = message
+
+        val toast = Toast(context)
+        toast.duration = Toast.LENGTH_SHORT
+        toast.show()
     }
 }

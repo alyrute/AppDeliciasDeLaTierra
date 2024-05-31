@@ -24,17 +24,12 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-
-
-
         val toolbar: Toolbar = binding.myToolbar
         setSupportActionBar(toolbar)
-
 
         val sharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE)
         val username = sharedPreferences.getString("username", "Usuario")
         val usuario = sharedPreferences.getString("usuario", "Usuario")
-
 
         // Establecer el título de la barra de acción
         supportActionBar?.title = "Bienvenid@ $username"
@@ -84,8 +79,5 @@ class MainActivity : AppCompatActivity() {
         startActivity(intent)
         finish()
     }
-
-
-
 
 }

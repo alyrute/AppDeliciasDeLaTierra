@@ -2,15 +2,15 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_width="wrap_content"
+    android:layout_height="150dp"
     android:layout_margin="2dp"
+    android:id="@+id/cardelete"
     card_view:cardBackgroundColor="@color/white"
     card_view:cardCornerRadius="25dp"
     card_view:cardElevation="1dp"
     card_view:cardUseCompatPadding="false"
-    card_view:contentPadding="10dp"
-    >
+    card_view:contentPadding="15dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="374dp"
@@ -43,12 +43,11 @@
             card_view:layout_constraintStart_toEndOf="@+id/frameLayout"
             card_view:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
+        <Button
             android:id="@+id/deletebuttom"
-            android:layout_width="108dp"
-            android:layout_height="42dp"
+            android:layout_width="111dp"
+            android:layout_height="47dp"
             android:layout_marginEnd="10dp"
-            android:background="@drawable/button"
             android:backgroundTint="@color/red"
             android:clickable="true"
             android:focusable="true"
@@ -59,8 +58,7 @@
             android:textColor="@color/white"
             android:textStyle="bold"
             card_view:layout_constraintBottom_toBottomOf="parent"
-            card_view:layout_constraintEnd_toEndOf="parent"
-             />
+            card_view:layout_constraintEnd_toEndOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

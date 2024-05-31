@@ -25,19 +25,11 @@ interface DeliciasService {
     @GET("producto/{idproducto}/usuario")
     fun getUsuarioByProducto(@Path("idproducto") idproducto: Int): Deferred<Response<Usuario>>
 
-    @GET("intercambios")
-    fun getIntercambios(): Deferred<Response<List<Intercambio>>>
-
-    @POST("intercambio")
-    fun insertarIntercambio(@Body intercambio: Intercambio): Deferred<Response<Intercambio>>
-
     @GET("login")
     fun getLogin(
         @Query("email") email: String,
         @Query("password") password: String): Deferred<Response<Usuario>>
 
-    @GET("usuarios")
-    fun getUsuarios(): Deferred<Response<List<Usuario>>>
     @GET("usuario/{idusuario}")
     fun getUsuarioById(@Path("idusuario") id: Int): Deferred<Response<Usuario>>
 

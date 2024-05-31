@@ -1,5 +1,6 @@
 package net.azarquiel.appdeliciasdelatierra
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
@@ -13,6 +14,9 @@ import net.azarquiel.appdeliciasdelatierra.view.RegisterActivity
 import net.azarquiel.appdeliciasdelatierra.viewmodel.MainViewModel
 import android.content.SharedPreferences
 import android.util.Log
+import android.view.LayoutInflater
+import android.widget.ImageView
+import android.widget.TextView
 import com.google.gson.Gson
 
 class LoginActivity : AppCompatActivity() {
@@ -39,7 +43,7 @@ class LoginActivity : AppCompatActivity() {
             if (email.isNotEmpty() && password.isNotEmpty()) {
                 loginUser(email, password)
             } else {
-                showToast("Por favor ingresa email y contraseña")
+                showCustomToast(this, "Por favor, ingrese el email y contraseña.")
             }
         }
 
@@ -56,7 +60,7 @@ class LoginActivity : AppCompatActivity() {
                 saveUsuario(usuario)
                 navigateToMain(usuario.nombre)
             } else {
-                showToast("Credenciales incorrectas")
+                showCustomToast(this, "Fallo el login, vuelva a intentarlo")
             }
         })
     }
@@ -75,9 +79,6 @@ class LoginActivity : AppCompatActivity() {
         editor.apply()
     }
 
-
-
-
     private fun navigateToMain(username: String) {
         val intent = Intent(this, MainActivity::class.java)
         intent.putExtra("username", username)
@@ -90,10 +91,20 @@ class LoginActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
+    fun showCustomToast(context: Context, message: String) {
+        val inflater = LayoutInflater.from(context)
+        val layout = inflater.inflate(R.layout.toast_custom, null)
 
-    private fun showToast(message: String) {
-        runOnUiThread {
-            Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
-        }
+        val imageView = layout.findViewById<ImageView>(R.id.logo)
+        imageView.setImageResource(R.drawable.logonasf) // Set your logo
+
+        val textView = layout.findViewById<TextView>(R.id.texto)
+        textView.text = message
+
+        val toast = Toast(context)
+        toast.duration = Toast.LENGTH_SHORT
+        toast.view = layout
+        toast.show()
     }
+
 }

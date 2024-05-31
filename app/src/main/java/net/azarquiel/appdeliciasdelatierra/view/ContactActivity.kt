@@ -1,7 +1,11 @@
 package net.azarquiel.appdeliciasdelatierra.view
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
+import android.view.LayoutInflater
+import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
@@ -50,9 +54,6 @@ class ContactActivity : AppCompatActivity() {
             if (mensajes != null) {
                 adapter.setMensajes(mensajes)
                 binding.contact.rvmensaje.scrollToPosition(adapter.itemCount - 1)
-                Log.d("ContactActivity", "Mensajes recibidos: $mensajes")
-            } else {
-                Log.e("ContactActivity", "No se encontraron mensajes.")
             }
         })
 
@@ -60,16 +61,13 @@ class ContactActivity : AppCompatActivity() {
             enviarMensaje()
         }
 
-
-
         // Obtener detalles del usuario por su ID y registrar la información en los logs
         viewModel.getUsuarioById(producto.usuario.idusuario ?: -1).observe(this, Observer { usuario ->
             if (usuario != null) {
                 binding.contacNombe.text = usuario.nombre
                 binding.contacPobPro.text = "${usuario.poblacion}, ${usuario.provincia}"
-                Log.d("ContactActivity", "Usuario: ${usuario.nombre}, Población: ${usuario.poblacion}, Provincia: ${usuario.provincia}")
             } else {
-                Toast.makeText(this, "Usuario no encontrado", Toast.LENGTH_SHORT).show()
+                showCustomToast(this, "Usuario no encontrado", Toast.LENGTH_SHORT)
             }
         })
 
@@ -82,8 +80,6 @@ class ContactActivity : AppCompatActivity() {
         adapter = AdapterMensaje(this, R.layout.rowcontact)
         binding.contact.rvmensaje.layoutManager = LinearLayoutManager(this)
         binding.contact.rvmensaje.adapter = adapter
-
-
     }
 
     private fun enviarMensaje() {
@@ -109,14 +105,7 @@ class ContactActivity : AppCompatActivity() {
                 binding.contact.rvmensaje.scrollToPosition(adapter.itemCount - 1)
             }
         }
-    }/*
-
-    private fun enviarMensajeAlReceptor(mensaje: Mensaje) {
-        lifecycleScope.launch {
-            viewModel.insertarMensaje(mensaje)
-            binding.tvMensaje.text.clear()
-        }
-    }*/
+    }
 
     private fun obtenerUsuario(): Usuario? {
         val sharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE)
@@ -136,8 +125,24 @@ class ContactActivity : AppCompatActivity() {
                 adapter.addMensaje(mensajeEnviado)
                 binding.tvMensaje.text.clear()
             } else {
-                Toast.makeText(this, "Error al enviar el mensaje", Toast.LENGTH_SHORT).show()
+                showCustomToast(this, "Error al enviar el mensaje", Toast.LENGTH_SHORT)
             }
         })
+    }
+
+    fun showCustomToast(context: Context, message: String, lengthShort: Int) {
+        val inflater = LayoutInflater.from(context)
+        val layout = inflater.inflate(R.layout.toast_custom, null)
+
+        val imageView = layout.findViewById<ImageView>(R.id.logo)
+        imageView.setImageResource(R.drawable.logonasf) // Set your logo
+
+        val textView = layout.findViewById<TextView>(R.id.texto)
+        textView.text = message
+
+        val toast = Toast(context)
+        toast.duration = Toast.LENGTH_SHORT
+        toast.view = layout
+        toast.show()
     }
 }

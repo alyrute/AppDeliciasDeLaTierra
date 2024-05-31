@@ -2,8 +2,11 @@ package net.azarquiel.appdeliciasdelatierra.view
 
 import android.os.Bundle
 import android.util.Log
+import android.widget.TextView
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.cardview.widget.CardView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -34,28 +37,30 @@ class DeleteActivity : AppCompatActivity() {
         viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
         setSupportActionBar(binding.toolbar)
         binding.toolbar.title = "Mis Productos"
+
         initRV()
         val usuario = obtenerUsuario()
 
         val idusuario: Int = usuario?.idusuario ?: -1
 
         viewModel.getProductos(idusuario).observe(this, Observer { productos ->
-
             productos?.let {
                 producto = it
-                Log.d("Soy tonta22222", "$producto")
                 adapter.setProducto(it)
             }
         })
+
+
     }
 
     private fun initRV() {
         adapter = AdapterDelete(this, R.layout.rowdelete)
-        binding.deleted.rvdeleteproducto.adapter = adapter
-        binding.deleted.rvdeleteproducto.layoutManager = LinearLayoutManager(this)
+        binding.delete.rvdelete.adapter=adapter
+        binding.delete.rvdelete.layoutManager=LinearLayoutManager(this)
+
+
+
     }
-
-
 
     private fun obtenerUsuario(): Usuario? {
         val sharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE)
@@ -67,6 +72,25 @@ class DeleteActivity : AppCompatActivity() {
         } else {
             null
         }
+    }
+
+    fun showConfirmationDialog(productId: Int) {
+        AlertDialog.Builder(this)
+            .setTitle("Eliminar producto")
+            .setMessage("¿Estás seguro de que quieres eliminar este producto?")
+            .setPositiveButton("Sí") { dialog, _ ->
+                viewModel.deleteProduct(productId).observe(this, Observer { success ->
+                    if (success) {
+                        // Aquí puedes actualizar tu RecyclerView para reflejar la eliminación del producto
+                        adapter.setProducto(producto.filter { it.idproducto != productId })
+                    }
+                })
+                dialog.dismiss()
+            }
+            .setNegativeButton("No") { dialog, _ ->
+                dialog.dismiss()
+            }
+            .show()
     }
 
 
