@@ -1,8 +1,12 @@
 package net.azarquiel.appdeliciasdelatierra.view
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
+import android.view.LayoutInflater
+import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
@@ -21,12 +25,10 @@ import net.azarquiel.appdeliciasdelatierra.viewmodel.MainViewModel
 
 class DeleteActivity : AppCompatActivity() {
 
-
     private lateinit var binding: ActivityDeleteBinding
     private lateinit var adapter: AdapterDelete
     private lateinit var viewModel: MainViewModel
     private var producto: List<Producto> = emptyList()
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,17 +51,12 @@ class DeleteActivity : AppCompatActivity() {
                 adapter.setProducto(it)
             }
         })
-
-
     }
 
     private fun initRV() {
         adapter = AdapterDelete(this, R.layout.rowdelete)
-        binding.delete.rvdelete.adapter=adapter
-        binding.delete.rvdelete.layoutManager=LinearLayoutManager(this)
-
-
-
+        binding.delete.rvdelete.adapter = adapter
+        binding.delete.rvdelete.layoutManager = LinearLayoutManager(this)
     }
 
     private fun obtenerUsuario(): Usuario? {
@@ -79,12 +76,7 @@ class DeleteActivity : AppCompatActivity() {
             .setTitle("Eliminar producto")
             .setMessage("¿Estás seguro de que quieres eliminar este producto?")
             .setPositiveButton("Sí") { dialog, _ ->
-                viewModel.deleteProduct(productId).observe(this, Observer { success ->
-                    if (success) {
-                        // Aquí puedes actualizar tu RecyclerView para reflejar la eliminación del producto
-                        adapter.setProducto(producto.filter { it.idproducto != productId })
-                    }
-                })
+                eliminarProducto(productId)
                 dialog.dismiss()
             }
             .setNegativeButton("No") { dialog, _ ->
@@ -93,5 +85,33 @@ class DeleteActivity : AppCompatActivity() {
             .show()
     }
 
+    private fun eliminarProducto(productId: Int) {
+        Log.d("DeleteActivity", "Attempting to delete product with ID: $productId")
+        viewModel.deleteProduct(productId).observe(this, Observer { isDeleted ->
+            if (isDeleted) {
+                Log.d("DeleteActivity", "Product successfully deleted")
+                adapter.deleteProductFromList(productId)
+                showCustomToast(this, "Producto eliminado exitosamente")
+            } else {
+                Log.e("DeleteActivity", "Error deleting product")
+                showCustomToast(this, "Error al eliminar el producto")
+            }
+        })
+    }
 
+    fun showCustomToast(context: Context, message: String) {
+        val inflater = LayoutInflater.from(context)
+        val layout = inflater.inflate(R.layout.toast_custom, null)
+
+        val imageView = layout.findViewById<ImageView>(R.id.logo)
+        imageView.setImageResource(R.drawable.logonasf) // Set your logo
+
+        val textView = layout.findViewById<TextView>(R.id.texto)
+        textView.text = message
+
+        val toast = Toast(context)
+        toast.duration = Toast.LENGTH_SHORT
+        toast.view = layout
+        toast.show()
+    }
 }

@@ -50,10 +50,7 @@ class AdapterDelete(val context: Context, val layout: Int) : RecyclerView.Adapte
     fun deleteProductFromList(productId: Int) {
         dataList = dataList.filter { it.idproducto != productId }
         notifyDataSetChanged()
-        Log.d(
-            "AdapterDelete",
-            "deleteProductFromList: dataList size after delete = ${dataList.size}"
-        )
+        Log.d("AdapterDelete", "deleteProductFromList: dataList size after delete = ${dataList.size}")
     }
 
     inner class ViewHolder(viewlayout: View) : RecyclerView.ViewHolder(viewlayout) {
@@ -63,22 +60,20 @@ class AdapterDelete(val context: Context, val layout: Int) : RecyclerView.Adapte
 
             tvrowdeleted.text = dataItem.nombre
 
-
             val deleteButton = itemView.findViewById<Button>(R.id.deletebuttom)
             deleteButton.setOnClickListener {
                 selectedPosition = adapterPosition
                 dataItem.idproducto?.let { productId ->
                     (context as DeleteActivity).showConfirmationDialog(productId)
                 }
-
-
-                val base64Image = dataItem.imagen
-                val decodedBytes = Base64.decode(base64Image, Base64.DEFAULT)
-                val bitmap = BitmapFactory.decodeByteArray(decodedBytes, 0, decodedBytes.size)
-                ivrowdeleteproducto.setImageBitmap(bitmap)
-
-                itemView.tag = dataItem
             }
+
+            val base64Image = dataItem.imagen
+            val decodedBytes = Base64.decode(base64Image, Base64.DEFAULT)
+            val bitmap = BitmapFactory.decodeByteArray(decodedBytes, 0, decodedBytes.size)
+            ivrowdeleteproducto.setImageBitmap(bitmap)
+
+            itemView.tag = dataItem
         }
     }
 }

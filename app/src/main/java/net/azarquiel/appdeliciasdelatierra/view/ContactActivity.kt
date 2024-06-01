@@ -52,10 +52,16 @@ class ContactActivity : AppCompatActivity() {
 
         viewModel.getMensajesByIdProducto(idproducto, senderid, receiverid).observe(this, Observer { mensajes ->
             if (mensajes != null) {
-                adapter.setMensajes(mensajes)
+                val mensajesFiltrados = mensajes.filter { mensaje ->
+                    mensaje.idproducto == idproducto &&
+                            (mensaje.senderid == senderid && mensaje.receiverid == receiverid) ||
+                            (mensaje.senderid == receiverid && mensaje.receiverid == senderid)
+                }
+                adapter.setMensajes(mensajesFiltrados)
                 binding.contact.rvmensaje.scrollToPosition(adapter.itemCount - 1)
             }
         })
+
 
         binding.bntenviar.setOnClickListener {
             enviarMensaje()

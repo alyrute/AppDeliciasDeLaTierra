@@ -98,7 +98,7 @@ class MainViewModel : ViewModel() {
     fun deleteProduct(productId: Int): LiveData<Boolean> {
         val result = MutableLiveData<Boolean>()
         viewModelScope.launch {
-            result.value = repository.deleteProduct(productId)
+            result.postValue(repository.deleteProduct(productId))
         }
         return result
     }

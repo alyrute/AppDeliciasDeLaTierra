@@ -59,19 +59,20 @@ class RegisterActivity : AppCompatActivity() {
 
     private fun validateFields(email: String, password: String, nombre: String, apellidos: String, poblacion: String, provincia: String): Boolean {
         if (email.isEmpty() || !android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            showCustomToast(this, "Por favor, ingrese el email y la contraseña.")
+            showCustomToast(this, "Por favor, ingrese un correo electrónico válido.")
             return false
         }
         if (password.length < 6) {
-            showCustomToast(this ,"Por favor, introduce un correo electrónico válido")
+            showCustomToast(this, "Por favor, introduce una contraseña válida, mínimo 6 caracteres.")
             return false
         }
         if (nombre.isEmpty() || apellidos.isEmpty() || poblacion.isEmpty() || provincia.isEmpty()) {
-            showCustomToast(this , "Todos los campos son obligatorios")
+            showCustomToast(this, "Todos los campos son obligatorios.")
             return false
         }
         return true
     }
+
 
     private fun registerUser(usuario: Usuario) {
         viewModel.register(usuario).observe(this, Observer { usuarioRegistrado ->
@@ -102,6 +103,7 @@ class RegisterActivity : AppCompatActivity() {
 
         val toast = Toast(context)
         toast.duration = Toast.LENGTH_SHORT
+        toast.view = layout
         toast.show()
     }
 }
